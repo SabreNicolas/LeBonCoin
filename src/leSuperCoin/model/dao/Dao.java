@@ -1,4 +1,4 @@
-package leSuperCoin.model;
+package leSuperCoin.model.dao;
 
 import java.util.Collection;
 
