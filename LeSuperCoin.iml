@@ -32,5 +32,6 @@
     <orderEntry type="library" name="Hibernate 5.4.10-5.4.10" level="project" />
     <orderEntry type="library" name="JPA 2.2-2.2" level="project" />
     <orderEntry type="library" name="org.mariadb.jdbc:mariadb-java-client:2.5.4" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:8.0.19" level="project" />
   </component>
 </module>
