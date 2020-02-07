@@ -8,13 +8,11 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema lesupercoin
+-- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `lesupercoin` DEFAULT CHARACTER SET utf8 ;
-USE `lesupercoin` ;
 
 -- -----------------------------------------------------
--- Table `lesupercoin`.`user`
+-- Schema mydb
 -- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `lesupercoin` DEFAULT CHARACTER SET utf8 ;
 USE `lesupercoin` ;
@@ -36,7 +34,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lesupercoin`.`surCategorie`
+-- Table `mydb`.`surCategorie`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `lesupercoin`.`surCategorie` ;
 
@@ -48,7 +46,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lesupercoin`.`categorie`
+-- Table `mydb`.`categorie`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `lesupercoin`.`categorie` ;
 
@@ -67,7 +65,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lesupercoin`.`annonce`
+-- Table `mydb`.`annonce`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `lesupercoin`.`annonce` ;
 
@@ -94,7 +92,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lesupercoin`.`photo`
+-- Table `mydb`.`photo`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `lesupercoin`.`photo` ;
 
@@ -113,7 +111,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lesupercoin`.`critere`
+-- Table `mydb`.`critere`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `lesupercoin`.`critere` ;
 
@@ -133,7 +131,7 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `lesupercoin`.`valeurCritere`
+-- Table `mydb`.`valeurCritere`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `lesupercoin`.`valeurCritere` ;
 
@@ -156,3 +154,8 @@ CREATE TABLE IF NOT EXISTS `lesupercoin`.`valeurCritere` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
