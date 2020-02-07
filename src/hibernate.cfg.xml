@@ -4,8 +4,9 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url"/>
-        <property name="connection.driver_class"/>
+        <property name="connection.url">jdbc:mariadb://localhost:3306/lesupercoin</property>
+        <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
+        <mapping class="leSuperCoin.model.TesttableEntity"/>
         <!-- <property name="connection.username"/> -->
         <!-- <property name="connection.password"/> -->
 

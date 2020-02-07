@@ -1,4 +1,4 @@
-package metier;
+package leSuperCoin.model.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
