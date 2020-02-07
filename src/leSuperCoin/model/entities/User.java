@@ -2,17 +2,13 @@ package leSuperCoin.model.entities;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Objects;
 
 @Entity
 @Table( name = "user",schema = "lesupercoin")
 public class User implements Serializable {
 
     @Id
-    @Column(name="id_user")
+    @Column(name="idUser")
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
     private Long idUser;
 
@@ -22,8 +18,8 @@ public class User implements Serializable {
     @Column(name="prenom")
     private String prenom;
 
-    @Column(name="pseudo")
-    private String pseudo;
+    @Column(name="login")
+    private String login;
 
     @Column(name="mdp")
     private String motDePasse;
