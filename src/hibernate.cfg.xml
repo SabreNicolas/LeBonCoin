@@ -7,8 +7,8 @@
         <property name="connection.url">jdbc:mariadb://localhost:3306/lesupercoin</property>
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
         <mapping class="leSuperCoin.model.TesttableEntity"/>
-        <!-- <property name="connection.username"/> -->
-        <!-- <property name="connection.password"/> -->
+        <property name="connection.username">usr_lesupercoin</property>
+        <property name="connection.password">12345678</property>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->

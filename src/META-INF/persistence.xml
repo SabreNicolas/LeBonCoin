@@ -10,8 +10,8 @@
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mariadb://localhost:3306/lesupercoin"/>
             <property name="hibernate.connection.driver_class" value="org.mariadb.jdbc.Driver"/>
-            <property name="hibernate.connection.username" value=""/>
-            <property name="hibernate.connection.password" value=""/>
+            <property name="hibernate.connection.username" value="usr_lesupercoin"/>
+            <property name="hibernate.connection.password" value="12345678"/>
             <property name="hibernate.archive.autodetection" value="class"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
