@@ -8,12 +8,26 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table( name = "",schema = "")
+@Table( name = "user",schema = "lesupercoin")
 public class User implements Serializable {
 
     @Id
+    @Column(name="id_user")
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    private Long id;
+    private Long idUser;
 
+    @Column(name="nom")
+    private String nom;
 
+    @Column(name="prenom")
+    private String prenom;
+
+    @Column(name="pseudo")
+    private String pseudo;
+
+    @Column(name="mdp")
+    private String motDePasse;
+
+    @Column(name="mail")
+    private String mail;
 }
