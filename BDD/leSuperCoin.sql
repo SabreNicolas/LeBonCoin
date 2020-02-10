@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  ven. 07 fév. 2020 à 12:20
+-- Généré le :  lun. 10 fév. 2020 à 21:48
 -- Version du serveur :  5.7.21
 -- Version de PHP :  7.2.7
 
@@ -13,9 +13,7 @@ SET time_zone = "+00:00";
 --
 -- Base de données :  `lesupercoin`
 --
-create database lesupercoin;
 
-use lesupercoin;
 -- --------------------------------------------------------
 
 --
@@ -29,6 +27,36 @@ CREATE TABLE `annonce` (
   `idCategorie` int(11) NOT NULL,
   `idUser` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `surCategorie`
+--
+
+CREATE TABLE `surCategorie` (
+  `idSurCategorie` int(11) NOT NULL,
+  `nomSurCategorie` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Déchargement des données de la table `surCategorie`
+--
+
+INSERT INTO `surCategorie` (`idSurCategorie`, `nomSurCategorie`) VALUES
+(3, 'Emploi'),
+(4, 'Véhicules'),
+(5, 'Immobilier'),
+(6, 'Vacances'),
+(7, 'Loisirs'),
+(8, 'Mode'),
+(9, 'Multimédia'),
+(10, 'Services'),
+(11, 'Maison'),
+(12, 'Matériel professionnel'),
+(13, 'Divers');
+
 
 -- --------------------------------------------------------
 
@@ -128,33 +156,6 @@ CREATE TABLE `photo` (
   `idAnnonce` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Structure de la table `surCategorie`
---
-
-CREATE TABLE `surCategorie` (
-  `idSurCategorie` int(11) NOT NULL,
-  `nomSurCategorie` varchar(45) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Déchargement des données de la table `surCategorie`
---
-
-INSERT INTO `surCategorie` (`idSurCategorie`, `nomSurCategorie`) VALUES
-(3, 'Emploi'),
-(4, 'Véhicules'),
-(5, 'Immobilier'),
-(6, 'Vacances'),
-(7, 'Loisirs'),
-(8, 'Mode'),
-(9, 'Multimédia'),
-(10, 'Services'),
-(11, 'Maison'),
-(12, 'Matériel professionnel'),
-(13, 'Divers');
 
 -- --------------------------------------------------------
 
@@ -178,10 +179,9 @@ CREATE TABLE `user` (
 --
 
 CREATE TABLE `valeurCritere` (
-  `idValeurCritere` int(11) NOT NULL,
-  `valeur` varchar(45) NOT NULL,
-  `idAnnonce` int(11) NOT NULL,
-  `idCritere` int(11) NOT NULL
+  `annonce_idAnnonce` int(11) NOT NULL,
+  `critere_idCritere` int(11) NOT NULL,
+  `value` varchar(45) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -233,9 +233,9 @@ ALTER TABLE `user`
 -- Index pour la table `valeurCritere`
 --
 ALTER TABLE `valeurCritere`
-  ADD PRIMARY KEY (`idValeurCritere`),
-  ADD KEY `annonce_idx` (`idAnnonce`),
-  ADD KEY `critere_idx` (`idCritere`);
+  ADD PRIMARY KEY (`annonce_idAnnonce`,`critere_idCritere`),
+  ADD KEY `fk_annonce_has_critere_critere1_idx` (`critere_idCritere`),
+  ADD KEY `fk_annonce_has_critere_annonce1_idx` (`annonce_idAnnonce`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -278,12 +278,6 @@ ALTER TABLE `user`
   MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `valeurCritere`
---
-ALTER TABLE `valeurCritere`
-  MODIFY `idValeurCritere` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- Contraintes pour les tables déchargées
 --
 
@@ -304,7 +298,7 @@ ALTER TABLE `categorie`
 -- Contraintes pour la table `critere`
 --
 ALTER TABLE `critere`
-  ADD CONSTRAINT `FK_categorie` FOREIGN KEY (`idCategorie`) REFERENCES `categorie` (`idCategorie`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `cat` FOREIGN KEY (`idCategorie`) REFERENCES `categorie` (`idCategorie`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Contraintes pour la table `photo`
@@ -316,5 +310,5 @@ ALTER TABLE `photo`
 -- Contraintes pour la table `valeurCritere`
 --
 ALTER TABLE `valeurCritere`
-  ADD CONSTRAINT `FK_annonce` FOREIGN KEY (`idAnnonce`) REFERENCES `annonce` (`idAnnonce`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_critere` FOREIGN KEY (`idCritere`) REFERENCES `critere` (`idCritere`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_annonce_has_critere_annonce1` FOREIGN KEY (`annonce_idAnnonce`) REFERENCES `annonce` (`idAnnonce`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_annonce_has_critere_critere1` FOREIGN KEY (`critere_idCritere`) REFERENCES `critere` (`idCritere`) ON DELETE NO ACTION ON UPDATE NO ACTION;
