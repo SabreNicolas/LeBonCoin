@@ -1,7 +1,6 @@
 package leSuperCoin.model.dao;
 
 public abstract class DaoFactory {
-
     public enum PersistenceType {
         JPA,
         JDBC,
@@ -20,14 +19,6 @@ public abstract class DaoFactory {
                 return null;
         }
     }
-
-    public abstract AnnonceDao getAnnonceDao();
-    public abstract CategorieDao getCategorieDao();
-    public abstract CritereDao getCritereDao();
-    public abstract PhotoDao getPhotoDao();
-    public abstract SurCategorieDao getSurCategorieDao();
-    public abstract UserDao getUserDao();
-    public abstract ValeurCritereDao getValeurCritereDao();
-
-
+    
+  //  public abstract AnnonceDao getAnnonceDao();
 }

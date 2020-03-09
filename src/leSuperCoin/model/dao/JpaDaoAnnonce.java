@@ -22,22 +22,12 @@ public class JpaDaoAnnonce extends JpaDao<Annonce> implements AnnonceDao {
 
     @Override
     public Annonce find(Class c, Integer id) {
-        return super.find(Annonce.class, id);
+        return super.find(c, id);
     }
 
     @Override
     public Collection<Annonce> findAll() {
-        Query query = session.createQuery("SELECT a FROM Annonce a");
-        return (Collection<Annonce>) query.getResultList();
-    }
-
-    @Override
-    public boolean deleteAll() {
-        Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM Annonce a");
-        query.executeUpdate();
-        tx.commit();
-        return true;
+        return super.findAll();
     }
 
     @Override
@@ -45,4 +35,8 @@ public class JpaDaoAnnonce extends JpaDao<Annonce> implements AnnonceDao {
         return super.delete(obj);
     }
 
+    @Override
+    public boolean deleteAll() {
+        return super.deleteAll();
+    }
 }
