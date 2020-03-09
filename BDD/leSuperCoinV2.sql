@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le :  lun. 09 mars 2020 à 10:32
+-- Généré le :  lun. 09 mars 2020 à 10:51
 -- Version du serveur :  5.7.21
 -- Version de PHP :  7.2.7
 
@@ -39,6 +39,12 @@ END$$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listCriteres` (`idCategorie` INTEGER)  BEGIN
 
 	SELECT * FROM critere WHERE critere.idCategorie = idCategorie;
+
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listPhotos` (`idAnnonce` INTEGER)  BEGIN
+
+	SELECT * FROM photo WHERE photo.idAnnonce = idAnnonce; 
 
 END$$
 
