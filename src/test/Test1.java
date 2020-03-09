@@ -7,7 +7,7 @@ public class Test1 {
 
     public static void main(final String[] args) throws Exception {
 
-        AnnonceDao atelierManager = (AnnonceDao) JpaDaoFactory.getDaoFactory(DaoFactory.PersistenceType.JPA).getAtelierDao();
+        //AnnonceDao atelierManager = (AnnonceDao) JpaDaoFactory.getDaoFactory(DaoFactory.PersistenceType.JPA).getAtelierDao();
 
     }
 }

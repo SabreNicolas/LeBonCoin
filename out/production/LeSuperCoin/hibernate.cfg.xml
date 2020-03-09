@@ -7,9 +7,26 @@
         <property name="connection.url">jdbc:mariadb://localhost:3306/lesupercoin</property>
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
 
+        <!--
+        <property name="connection.username">max</property>
+        <property name="connection.password">max</property>
+        -->
+
+        <!--
+        <property name="connection.url">jdbc:mysql://localhost:8889/lesupercoin</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        -->
+
         <property name="connection.username">usr_lesupercoin</property>
         <property name="connection.password">12345678</property>
 
-        <mapping class="leSuperCoin.model.TesttableEntity"/>
+
+        <mapping class="leSuperCoin.model.entities.Annonce"/>
+        <mapping class="leSuperCoin.model.entities.Categorie"/>
+        <mapping class="leSuperCoin.model.entities.Critere"/>
+        <mapping class="leSuperCoin.model.entities.Photo"/>
+        <mapping class="leSuperCoin.model.entities.SurCategorie"/>
+        <mapping class="leSuperCoin.model.entities.User"/>
+        <mapping class="leSuperCoin.model.entities.ValeurCritere"/>
     </session-factory>
 </hibernate-configuration>

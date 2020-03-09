@@ -49,7 +49,7 @@ public class ValeurCritere implements Serializable {
     public Critere getCritere() {
         return critere;
     }
-
+//test
     public void setCritere(Critere critere) {
         this.critere = critere;
     }
