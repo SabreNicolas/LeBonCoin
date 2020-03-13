@@ -11,7 +11,7 @@ public class User implements Serializable {
     @Id
     @Column(name="idUser")
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name="nom")
     private String nom;
@@ -31,7 +31,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

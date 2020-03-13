@@ -8,13 +8,11 @@ import java.util.Objects;
 @Table( name = "valeurcritere",schema = "lesupercoin")
 public class ValeurCritere implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @Column(name = "value")
     private String valeur;
 
+    @Id
     @ManyToOne
     @JoinColumn(name="annonce_idAnnonce", referencedColumnName = "idAnnonce")
     private Annonce annonce;
@@ -26,8 +24,8 @@ public class ValeurCritere implements Serializable {
     public ValeurCritere() {
     }
 
-    public Long getId() {
-        return id;
+    public int getId() {
+        return annonce.getId();
     }
     public String getValeur() {
         return valeur;
@@ -48,7 +46,7 @@ public class ValeurCritere implements Serializable {
     public Critere getCritere() {
         return critere;
     }
-//test
+
     public void setCritere(Critere critere) {
         this.critere = critere;
     }
@@ -71,7 +69,7 @@ public class ValeurCritere implements Serializable {
     @Override
     public String toString() {
         return "ValeurCritere{" +
-                "id=" + id +
+                "id=" + getId() +
                 ", valeur='" + valeur + '\'' +
                 ", annonce=" + annonce +
                 ", critere=" + critere +

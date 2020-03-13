@@ -6,7 +6,7 @@
 
     <persistence-unit name="NewPersistenceUnit">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>test.Test1</class>
+        <class>test.ListerAllEntitiesTest</class>
         <properties>
             <property name="hibernate.connection.url" value=""/>
             <property name="hibernate.connection.driver_class" value=""/>

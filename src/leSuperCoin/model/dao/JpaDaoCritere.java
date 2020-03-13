@@ -46,4 +46,10 @@ public class JpaDaoCritere extends JpaDao<Critere> implements CritereDao {
     public boolean delete(Critere obj) {
         return super.delete(obj);
     }
+
+
+    public Collection<Critere> findCritereByIdSurCategorieAndNoSurCategorie(int i) {
+        Query query = session.createQuery("SELECT c FROM Critere c WHERE c.surCategorie="+i+" OR c.surCategorie=null");
+        return (Collection<Critere>) query.getResultList();
+    }
 }

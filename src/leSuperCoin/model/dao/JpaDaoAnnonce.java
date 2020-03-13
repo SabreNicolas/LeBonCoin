@@ -1,6 +1,7 @@
 package leSuperCoin.model.dao;
 
 import leSuperCoin.model.entities.Annonce;
+import leSuperCoin.model.entities.Critere;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -45,4 +46,8 @@ public class JpaDaoAnnonce extends JpaDao<Annonce> implements AnnonceDao {
         return super.delete(obj);
     }
 
+    public Collection<Annonce> findAnnonceByCategorie(int i) {
+        Query query = session.createQuery("SELECT a FROM Annonce a WHERE a.categorie="+i);
+        return (Collection<Annonce>) query.getResultList();
+    }
 }

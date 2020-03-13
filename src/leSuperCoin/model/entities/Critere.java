@@ -12,7 +12,7 @@ public class Critere implements Serializable {
     @Id
     @Column(name = "idCritere")
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name="idSurCategorie", referencedColumnName = "idSurCategorie")
@@ -27,7 +27,7 @@ public class Critere implements Serializable {
     public Critere() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

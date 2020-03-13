@@ -6,7 +6,6 @@
     <session-factory>
         <property name="connection.url">jdbc:mariadb://localhost:3306/lesupercoin</property>
         <property name="connection.driver_class">org.mariadb.jdbc.Driver</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQL8Dialect</property>
         <property name="connection.username">max</property>
         <property name="connection.password">max</property>
 

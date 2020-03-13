@@ -11,7 +11,7 @@ public class SurCategorie implements Serializable {
     @Id
     @Column(name = "idSurCategorie")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "nomSurCategorie")
     private String nom;
@@ -19,7 +19,7 @@ public class SurCategorie implements Serializable {
     public SurCategorie() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

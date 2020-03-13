@@ -11,7 +11,7 @@ public class Annonce implements Serializable {
     @Id
     @Column(name = "idAnnonce")
     @GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
 
     @ManyToOne
@@ -31,7 +31,7 @@ public class Annonce implements Serializable {
     public Annonce() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 

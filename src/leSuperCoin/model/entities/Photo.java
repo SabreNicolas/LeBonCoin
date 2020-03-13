@@ -11,7 +11,7 @@ public class Photo implements Serializable {
     @Id
     @Column(name = "idPhoto")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "photo")
     private String nom;
@@ -23,7 +23,7 @@ public class Photo implements Serializable {
     public Photo() {
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
