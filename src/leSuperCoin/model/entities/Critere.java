@@ -15,8 +15,8 @@ public class Critere implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="idCategorie", referencedColumnName = "idCategorie")
-    private Categorie categorie;
+    @JoinColumn(name="idSurCategorie", referencedColumnName = "idSurCategorie")
+    private SurCategorie surCategorie;
 
     @Column(name="nomCritere")
     private String nomCritere;
@@ -32,12 +32,12 @@ public class Critere implements Serializable {
     }
 
 
-    public Categorie getCategorie() {
-        return categorie;
+    public SurCategorie getSurCategorie() {
+        return surCategorie;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setSurCategorie(SurCategorie surCategorie) {
+        this.surCategorie = surCategorie;
     }
 
     public String getNomCritere() {
@@ -61,21 +61,21 @@ public class Critere implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Critere critere = (Critere) o;
-        return Objects.equals(categorie, critere.categorie) &&
+        return Objects.equals(surCategorie, critere.surCategorie) &&
                 Objects.equals(nomCritere, critere.nomCritere) &&
                 Objects.equals(type, critere.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(categorie, nomCritere, type);
+        return Objects.hash(surCategorie, nomCritere, type);
     }
 
     @Override
     public String toString() {
         return "Critere{" +
                 "id=" + id +
-                ", categorie=" + categorie +
+                ", categorie=" + surCategorie +
                 ", nomCritere='" + nomCritere + '\'' +
                 ", type='" + type + '\'' +
                 '}';

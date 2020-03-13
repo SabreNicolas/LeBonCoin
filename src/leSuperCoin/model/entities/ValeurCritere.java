@@ -9,19 +9,18 @@ import java.util.Objects;
 public class ValeurCritere implements Serializable {
 
     @Id
-    @Column(name = "idValeurCritere")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "valeur")
+    @Column(name = "value")
     private String valeur;
 
     @ManyToOne
-    @JoinColumn(name="idAnnonce", referencedColumnName = "idAnnonce")
+    @JoinColumn(name="annonce_idAnnonce", referencedColumnName = "idAnnonce")
     private Annonce annonce;
 
     @ManyToOne
-    @JoinColumn(name="idCritere", referencedColumnName = "idCritere")
+    @JoinColumn(name="critere_idCritere", referencedColumnName = "idCritere")
     private Critere critere;
 
     public ValeurCritere() {

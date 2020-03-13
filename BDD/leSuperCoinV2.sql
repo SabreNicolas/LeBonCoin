@@ -23,7 +23,7 @@ END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listCriteres` (`idCategorie` INTEGER)  BEGIN
 
-	SELECT * FROM critere WHERE critere.idCategorie = idCategorie;
+	SELECT * FROM critere WHERE critere.idSurCategorie = idCategorie;
 
 END$$
 
@@ -130,7 +130,7 @@ CREATE TRIGGER `categorie_BEFORE_DELETE` BEFORE DELETE ON `categorie` FOR EACH R
 	SET MESSAGE_TEXT = 'Impossible de supprimer la catégorie car il existe des annonces pour cette catégorie';
     END IF;
     
-    DELETE FROM critere WHERE idCategorie = OLD.idCategorie;
+    DELETE FROM critere WHERE idSurCategorie = OLD.idCategorie;
 
 END
 $$
@@ -141,7 +141,7 @@ DELIMITER ;
 -- Déchargement des données de la table `critere`
 --
 
-INSERT INTO `critere` (`idCritere`, `nomCritere`, `type`, `idCategorie`) VALUES
+INSERT INTO `critere` (`idCritere`, `nomCritere`, `type`, idSurCategorie) VALUES
 (1, 'Prix', 'Float', NULL),
 (2, 'Localisation', 'Enum', NULL),
 (6, 'critereAmeublement', 'input', 48),
@@ -267,4 +267,4 @@ CREATE TABLE `vueglobale` (
 --
 DROP TABLE IF EXISTS `vueglobale`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vueglobale`  AS  select `annonce`.`idAnnonce` AS `idAnnonce`,`annonce`.`statut` AS `statut`,`annonce`.`description` AS `description`,`categorie`.`idCategorie` AS `idCategorie`,`user`.`idUser` AS `idUser`,`photo`.`idPhoto` AS `idPhoto`,`photo`.`photo` AS `photo`,`user`.`nom` AS `nom`,`user`.`prenom` AS `prenom`,`user`.`login` AS `login`,`valeurcritere`.`value` AS `value`,`categorie`.`nomCategorie` AS `nomCategorie`,`surcategorie`.`idSurCategorie` AS `idSurCategorie`,`critere`.`idCritere` AS `idCritere`,`critere`.`nomCritere` AS `nomCritere`,`critere`.`type` AS `type` from ((((((`annonce` join `photo` on((`annonce`.`idAnnonce` = `photo`.`idAnnonce`))) join `user` on((`annonce`.`idUser` = `user`.`idUser`))) join `valeurcritere` on((`annonce`.`idAnnonce` = `valeurcritere`.`annonce_idAnnonce`))) join `categorie`) join `surcategorie`) join `critere`) where ((`annonce`.`idAnnonce` = `valeurcritere`.`annonce_idAnnonce`) and (`critere`.`idCritere` = `valeurcritere`.`critere_idCritere`) and (`categorie`.`idSurCategorie` = `surcategorie`.`idSurCategorie`) and (`critere`.`idCategorie` = `categorie`.`idCategorie`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vueglobale`  AS  select `annonce`.`idAnnonce` AS `idAnnonce`,`annonce`.`statut` AS `statut`,`annonce`.`description` AS `description`,`categorie`.`idCategorie` AS `idCategorie`,`user`.`idUser` AS `idUser`,`photo`.`idPhoto` AS `idPhoto`,`photo`.`photo` AS `photo`,`user`.`nom` AS `nom`,`user`.`prenom` AS `prenom`,`user`.`login` AS `login`,`valeurcritere`.`value` AS `value`,`categorie`.`nomCategorie` AS `nomCategorie`,`surcategorie`.`idSurCategorie` AS `idSurCategorie`,`critere`.`idCritere` AS `idCritere`,`critere`.`nomCritere` AS `nomCritere`,`critere`.`type` AS `type` from ((((((`annonce` join `photo` on((`annonce`.`idAnnonce` = `photo`.`idAnnonce`))) join `user` on((`annonce`.`idUser` = `user`.`idUser`))) join `valeurcritere` on((`annonce`.`idAnnonce` = `valeurcritere`.`annonce_idAnnonce`))) join `categorie`) join `surcategorie`) join `critere`) where ((`annonce`.`idAnnonce` = `valeurcritere`.`annonce_idAnnonce`) and (`critere`.`idCritere` = `valeurcritere`.`critere_idCritere`) and (`categorie`.`idSurCategorie` = `surcategorie`.`idSurCategorie`) and (`critere`.idSurCategorie = `categorie`.`idCategorie`)) ;
