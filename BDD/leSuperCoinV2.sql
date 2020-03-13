@@ -27,12 +27,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `listCriteres` (`idCategorie` INTEGE
 
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `listPhotos` (`idAnnonce` INTEGER)  BEGIN
-
-	SELECT * FROM photo WHERE photo.idAnnonce = idAnnonce; 
-
-END$$
-
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listValeursCriteres` (`idAnnonce` INTEGER)  BEGIN
 
 	SELECT * FROM valeurCritere  
