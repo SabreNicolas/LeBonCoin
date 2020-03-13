@@ -1,3 +1,18 @@
+-- phpMyAdmin SQL Dump
+-- version 4.8.2
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : localhost:8889
+-- Généré le :  ven. 13 mars 2020 à 14:37
+-- Version du serveur :  5.7.21
+-- Version de PHP :  7.2.7
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+--
+-- Base de données :  `lesupercoin`
+--
 
 DELIMITER $$
 --
@@ -27,6 +42,12 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `listCriteres` (`idCategorie` INTEGE
 
 END$$
 
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listPhotos` (`idAnnonce` INTEGER)  BEGIN
+
+	SELECT * FROM photo WHERE photo.idAnnonce = idAnnonce; 
+
+END$$
+
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listValeursCriteres` (`idAnnonce` INTEGER)  BEGIN
 
 	SELECT * FROM valeurCritere  
@@ -37,13 +58,19 @@ END$$
 
 DELIMITER ;
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `annonce`
+-- Structure de la table `annonce`
 --
 
-INSERT INTO `annonce` (`idAnnonce`, `statut`, `description`, `idCategorie`, `idUser`) VALUES
-(5, 1, 'active', 48, 3),
-(6, 0, 'inactive', 2, 3);
+CREATE TABLE `annonce` (
+  `idAnnonce` int(11) NOT NULL,
+  `statut` tinyint(4) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `idCategorie` int(11) NOT NULL,
+  `idUser` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déclencheurs `annonce`
@@ -58,7 +85,18 @@ END
 $$
 DELIMITER ;
 
+-- --------------------------------------------------------
+
 --
+-- Structure de la table `categorie`
+--
+
+CREATE TABLE `categorie` (
+  `idCategorie` int(11) NOT NULL,
+  `nomCategorie` varchar(45) NOT NULL,
+  `idSurCategorie` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Déchargement des données de la table `categorie`
 --
@@ -130,22 +168,51 @@ CREATE TRIGGER `categorie_BEFORE_DELETE` BEFORE DELETE ON `categorie` FOR EACH R
 	SET MESSAGE_TEXT = 'Impossible de supprimer la catégorie car il existe des annonces pour cette catégorie';
     END IF;
     
-    DELETE FROM critere WHERE idSurCategorie = OLD.idCategorie;
+    DELETE FROM critere WHERE idSurCategorie = OLD.idSurCategorie;
 
 END
 $$
 DELIMITER ;
 
+-- --------------------------------------------------------
+
 --
+-- Structure de la table `critere`
+--
+
+CREATE TABLE `critere` (
+  `idCritere` int(11) NOT NULL,
+  `nomCritere` varchar(45) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  `idSurCategorie` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 --
 -- Déchargement des données de la table `critere`
 --
 
-INSERT INTO `critere` (`idCritere`, `nomCritere`, `type`, idSurCategorie) VALUES
+INSERT INTO `critere` (`idCritere`, `nomCritere`, `type`, `idSurCategorie`) VALUES
 (1, 'Prix', 'Float', NULL),
 (2, 'Localisation', 'Enum', NULL),
-(6, 'critereAmeublement', 'input', 48),
-(7, 'critereAmeublement2', 'input', 48);
+(18, 'Etat', 'Select', NULL),
+(20, 'Marque', 'Select', 4),
+(21, 'Première immatriculation', 'Date', 4),
+(22, 'Kilométrage', 'Float', 4),
+(23, 'Equipement', 'String', 13),
+(24, 'Type de contrat', 'Checkbox', 3),
+(25, 'Rémunération', 'Float', 3),
+(26, 'Intitulé du poste', 'String', 3),
+(27, 'Superficie', 'Float', 5),
+(28, 'Charges', 'Float', 5),
+(29, 'Sport', 'Checkbox', 7),
+(30, 'Gadget', 'String', 11),
+(31, 'Marque', 'Select', 12),
+(32, 'Marque', 'Select', 8),
+(33, 'Taille', 'String', 8),
+(34, 'Marque', 'Select', 9),
+(35, 'Date d\'achat', 'Date', 9),
+(36, 'Restauration sur place', 'checkbox', 6),
+(37, 'Nombre d\'étoiles', 'checkbox', 6);
 
 --
 -- Déclencheurs `critere`
@@ -170,10 +237,26 @@ DELIMITER ;
 
 -- --------------------------------------------------------
 
-INSERT INTO `photo` (`idPhoto`, `photo`, `idAnnonce`) VALUES
-(2, 'test', 5);
+--
+-- Structure de la table `photo`
+--
+
+CREATE TABLE `photo` (
+  `idPhoto` int(11) NOT NULL,
+  `photo` text NOT NULL,
+  `idAnnonce` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
+
+--
+-- Structure de la table `surCategorie`
+--
+
+CREATE TABLE `surCategorie` (
+  `idSurCategorie` int(11) NOT NULL,
+  `nomSurCategorie` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `surCategorie`
@@ -207,6 +290,19 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `user`
+--
+
+CREATE TABLE `user` (
+  `idUser` int(11) NOT NULL,
+  `nom` varchar(45) NOT NULL,
+  `prenom` varchar(45) NOT NULL,
+  `login` varchar(45) NOT NULL,
+  `mail` varchar(45) NOT NULL,
+  `mdp` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
 -- Déchargement des données de la table `user`
 --
 
@@ -228,12 +324,14 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Déchargement des données de la table `valeurCritere`
+-- Structure de la table `valeurCritere`
 --
 
-INSERT INTO `valeurCritere` (`annonce_idAnnonce`, `critere_idCritere`, `value`) VALUES
-(5, 1, '56'),
-(5, 2, '57');
+CREATE TABLE `valeurCritere` (
+  `annonce_idAnnonce` int(11) NOT NULL,
+  `critere_idCritere` int(11) NOT NULL,
+  `value` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -267,4 +365,133 @@ CREATE TABLE `vueglobale` (
 --
 DROP TABLE IF EXISTS `vueglobale`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vueglobale`  AS  select `annonce`.`idAnnonce` AS `idAnnonce`,`annonce`.`statut` AS `statut`,`annonce`.`description` AS `description`,`categorie`.`idCategorie` AS `idCategorie`,`user`.`idUser` AS `idUser`,`photo`.`idPhoto` AS `idPhoto`,`photo`.`photo` AS `photo`,`user`.`nom` AS `nom`,`user`.`prenom` AS `prenom`,`user`.`login` AS `login`,`valeurcritere`.`value` AS `value`,`categorie`.`nomCategorie` AS `nomCategorie`,`surcategorie`.`idSurCategorie` AS `idSurCategorie`,`critere`.`idCritere` AS `idCritere`,`critere`.`nomCritere` AS `nomCritere`,`critere`.`type` AS `type` from ((((((`annonce` join `photo` on((`annonce`.`idAnnonce` = `photo`.`idAnnonce`))) join `user` on((`annonce`.`idUser` = `user`.`idUser`))) join `valeurcritere` on((`annonce`.`idAnnonce` = `valeurcritere`.`annonce_idAnnonce`))) join `categorie`) join `surcategorie`) join `critere`) where ((`annonce`.`idAnnonce` = `valeurcritere`.`annonce_idAnnonce`) and (`critere`.`idCritere` = `valeurcritere`.`critere_idCritere`) and (`categorie`.`idSurCategorie` = `surcategorie`.`idSurCategorie`) and (`critere`.idSurCategorie = `categorie`.`idCategorie`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vueglobale`  AS  select `annonce`.`idAnnonce` AS `idAnnonce`,`annonce`.`statut` AS `statut`,`annonce`.`description` AS `description`,`categorie`.`idCategorie` AS `idCategorie`,`user`.`idUser` AS `idUser`,`photo`.`idPhoto` AS `idPhoto`,`photo`.`photo` AS `photo`,`user`.`nom` AS `nom`,`user`.`prenom` AS `prenom`,`user`.`login` AS `login`,`valeurcritere`.`value` AS `value`,`categorie`.`nomCategorie` AS `nomCategorie`,`surcategorie`.`idSurCategorie` AS `idSurCategorie`,`critere`.`idCritere` AS `idCritere`,`critere`.`nomCritere` AS `nomCritere`,`critere`.`type` AS `type` from ((((((`annonce` join `photo` on((`annonce`.`idAnnonce` = `photo`.`idAnnonce`))) join `user` on((`annonce`.`idUser` = `user`.`idUser`))) join `valeurcritere` on((`annonce`.`idAnnonce` = `valeurcritere`.`annonce_idAnnonce`))) join `categorie`) join `surcategorie`) join `critere`) where ((`annonce`.`idAnnonce` = `valeurcritere`.`annonce_idAnnonce`) and (`critere`.`idCritere` = `valeurcritere`.`critere_idCritere`) and (`categorie`.`idSurCategorie` = `surcategorie`.`idSurCategorie`) and (`critere`.`idSurCategorie` = `categorie`.`idSurCategorie`)) ;
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `annonce`
+--
+ALTER TABLE `annonce`
+  ADD PRIMARY KEY (`idAnnonce`),
+  ADD KEY `categorie_idx` (`idCategorie`),
+  ADD KEY `user_idx` (`idUser`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD PRIMARY KEY (`idCategorie`),
+  ADD KEY `surcategorie_idx` (`idSurCategorie`);
+
+--
+-- Index pour la table `critere`
+--
+ALTER TABLE `critere`
+  ADD PRIMARY KEY (`idCritere`),
+  ADD KEY `categorie_idx` (`idSurCategorie`);
+
+--
+-- Index pour la table `photo`
+--
+ALTER TABLE `photo`
+  ADD PRIMARY KEY (`idPhoto`),
+  ADD KEY `annonce_idx` (`idAnnonce`);
+
+--
+-- Index pour la table `surCategorie`
+--
+ALTER TABLE `surCategorie`
+  ADD PRIMARY KEY (`idSurCategorie`);
+
+--
+-- Index pour la table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`idUser`);
+
+--
+-- Index pour la table `valeurCritere`
+--
+ALTER TABLE `valeurCritere`
+  ADD PRIMARY KEY (`annonce_idAnnonce`,`critere_idCritere`),
+  ADD KEY `fk_annonce_has_critere_critere1_idx` (`critere_idCritere`),
+  ADD KEY `fk_annonce_has_critere_annonce1_idx` (`annonce_idAnnonce`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `annonce`
+--
+ALTER TABLE `annonce`
+  MODIFY `idAnnonce` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  MODIFY `idCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
+
+--
+-- AUTO_INCREMENT pour la table `critere`
+--
+ALTER TABLE `critere`
+  MODIFY `idCritere` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT pour la table `photo`
+--
+ALTER TABLE `photo`
+  MODIFY `idPhoto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT pour la table `surCategorie`
+--
+ALTER TABLE `surCategorie`
+  MODIFY `idSurCategorie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT pour la table `user`
+--
+ALTER TABLE `user`
+  MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `annonce`
+--
+ALTER TABLE `annonce`
+  ADD CONSTRAINT `categorie` FOREIGN KEY (`idCategorie`) REFERENCES `categorie` (`idCategorie`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `user` FOREIGN KEY (`idUser`) REFERENCES `user` (`idUser`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `categorie`
+--
+ALTER TABLE `categorie`
+  ADD CONSTRAINT `surcategorie` FOREIGN KEY (`idSurCategorie`) REFERENCES `surCategorie` (`idSurCategorie`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `critere`
+--
+ALTER TABLE `critere`
+  ADD CONSTRAINT `cat` FOREIGN KEY (`idSurCategorie`) REFERENCES `surCategorie` (`idSurCategorie`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `photo`
+--
+ALTER TABLE `photo`
+  ADD CONSTRAINT `annonce` FOREIGN KEY (`idAnnonce`) REFERENCES `annonce` (`idAnnonce`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Contraintes pour la table `valeurCritere`
+--
+ALTER TABLE `valeurCritere`
+  ADD CONSTRAINT `fk_annonce_has_critere_annonce1` FOREIGN KEY (`annonce_idAnnonce`) REFERENCES `annonce` (`idAnnonce`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_annonce_has_critere_critere1` FOREIGN KEY (`critere_idCritere`) REFERENCES `critere` (`idCritere`) ON DELETE NO ACTION ON UPDATE NO ACTION;
