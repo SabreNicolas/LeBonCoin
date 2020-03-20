@@ -17,6 +17,7 @@ public class ValeurCritere implements Serializable {
     @JoinColumn(name="annonce_idAnnonce", referencedColumnName = "idAnnonce")
     private Annonce annonce;
 
+    @Id
     @ManyToOne
     @JoinColumn(name="critere_idCritere", referencedColumnName = "idCritere")
     private Critere critere;

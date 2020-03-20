@@ -49,6 +49,6 @@ public class JpaDaoCategorie extends JpaDao<Categorie> implements CategorieDao {
 
     public Collection<Categorie> findAllCategorieBySurCategorie(int i) {
         Query query = session.createQuery("SELECT c FROM Categorie c WHERE c.surCategorie="+i);
-        return (Collection<Annonce>) query.getResultList();
+        return (Collection<Categorie>) query.getResultList();
     }
 }

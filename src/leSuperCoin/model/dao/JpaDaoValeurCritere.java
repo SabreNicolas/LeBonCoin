@@ -50,6 +50,6 @@ public class JpaDaoValeurCritere extends JpaDao<ValeurCritere> implements Valeur
 
     public Collection<ValeurCritere> findAllValeurCritereByAnnonce(int i) {
         Query query = session.createQuery("SELECT v FROM ValeurCritere v WHERE v.annonce="+i);
-        return (Collection<Annonce>) query.getResultList();
+        return (Collection<ValeurCritere>) query.getResultList();
     }
 }

@@ -69,6 +69,44 @@ public class AnnonceTest {
             System.out.println(t);
         }
 
+        System.out.println("---------------");
+        System.out.println("---Annonce By Categorie & active---");
+        System.out.println("---------------");
+        for(Annonce t : annonceManager.findAnnonceByCategorieEtat(4,1)) {
+            System.out.println(t);
+        }
+
+        System.out.println("---------------");
+        System.out.println("---Annonce By Categorie & inactive---");
+        System.out.println("---------------");
+        for(Annonce t : annonceManager.findAnnonceByCategorieEtat(4,0)) {
+            System.out.println(t);
+        }
+
+        System.out.println("---------------");
+        System.out.println("---Annonce By User---");
+        System.out.println("---------------");
+        for(Annonce t : annonceManager.findAllAnnonceByUser(3)) {
+            System.out.println(t);
+        }
+
+
+        System.out.println("---------------");
+        System.out.println("---Annonce By User and active---");
+        System.out.println("---------------");
+        for(Annonce t : annonceManager.findAllAnnonceByUserEtat(3,1)) {
+            System.out.println(t);
+        }
+
+
+        System.out.println("---------------");
+        System.out.println("---Annonce By User and inactive---");
+        System.out.println("---------------");
+        for(Annonce t : annonceManager.findAllAnnonceByUserEtat(3,0)) {
+            System.out.println(t);
+        }
+
+
         annonceManager.close();
 
 

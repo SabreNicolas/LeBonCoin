@@ -50,6 +50,6 @@ public class JpaDaoPhoto extends JpaDao<Photo> implements PhotoDao {
 
     public Collection<Photo> findAllPhotoByAnnonce(int i) {
         Query query = session.createQuery("SELECT p FROM Photo p WHERE p.annonce="+i);
-        return (Collection<Annonce>) query.getResultList();
+        return (Collection<Photo>) query.getResultList();
     }
 }

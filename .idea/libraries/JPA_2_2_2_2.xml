@@ -1,7 +1,7 @@
 <component name="libraryTable">
   <library name="JPA 2.2-2.2">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/javax.persistence.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/hibernate-core-5.4.11.Final.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
