@@ -1,7 +1,9 @@
 package leSuperCoin.model.dao;
 
+import leSuperCoin.model.entities.Annonce;
 import leSuperCoin.model.entities.Critere;
 import leSuperCoin.model.entities.Photo;
+import leSuperCoin.model.entities.ValeurCritere;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -44,5 +46,10 @@ public class JpaDaoPhoto extends JpaDao<Photo> implements PhotoDao {
     @Override
     public boolean delete(Photo obj) {
         return super.delete(obj);
+    }
+
+    public Collection<Photo> findAllPhotoByAnnonce(int i) {
+        Query query = session.createQuery("SELECT p FROM Photo p WHERE p.annonce="+i);
+        return (Collection<Annonce>) query.getResultList();
     }
 }

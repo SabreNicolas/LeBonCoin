@@ -2,6 +2,7 @@ package leSuperCoin.model.dao;
 
 import leSuperCoin.model.entities.Annonce;
 import leSuperCoin.model.entities.Categorie;
+import leSuperCoin.model.entities.Photo;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -44,5 +45,10 @@ public class JpaDaoCategorie extends JpaDao<Categorie> implements CategorieDao {
     @Override
     public boolean delete(Categorie obj) {
         return super.delete(obj);
+    }
+
+    public Collection<Categorie> findAllCategorieBySurCategorie(int i) {
+        Query query = session.createQuery("SELECT c FROM Categorie c WHERE c.surCategorie="+i);
+        return (Collection<Annonce>) query.getResultList();
     }
 }

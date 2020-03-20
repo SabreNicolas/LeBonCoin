@@ -1,5 +1,6 @@
 package leSuperCoin.model.dao;
 
+import leSuperCoin.model.entities.Annonce;
 import leSuperCoin.model.entities.User;
 import leSuperCoin.model.entities.ValeurCritere;
 import org.hibernate.Transaction;
@@ -44,5 +45,11 @@ public class JpaDaoValeurCritere extends JpaDao<ValeurCritere> implements Valeur
     @Override
     public boolean delete(ValeurCritere obj) {
         return super.delete(obj);
+    }
+
+
+    public Collection<ValeurCritere> findAllValeurCritereByAnnonce(int i) {
+        Query query = session.createQuery("SELECT v FROM ValeurCritere v WHERE v.annonce="+i);
+        return (Collection<Annonce>) query.getResultList();
     }
 }

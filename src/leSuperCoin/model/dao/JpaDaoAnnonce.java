@@ -50,4 +50,16 @@ public class JpaDaoAnnonce extends JpaDao<Annonce> implements AnnonceDao {
         Query query = session.createQuery("SELECT a FROM Annonce a WHERE a.categorie="+i);
         return (Collection<Annonce>) query.getResultList();
     }
+
+    public Collection<Annonce> findAllAnnonceByUser(int i) {
+        Query query = session.createQuery("SELECT a FROM Annonce a WHERE a.utilisateur="+i);
+        return (Collection<Annonce>) query.getResultList();
+    }
+
+    // 1 = annonce active et 0 annonce inactive
+    public Collection<Annonce> findAllAnnonceByUserEtat(int i, int j) {
+        Query query = session.createQuery("SELECT a FROM Annonce a WHERE a.utilisateur="+i+"AND a.statut="+j);
+        return (Collection<Annonce>) query.getResultList();
+    }
+
 }
