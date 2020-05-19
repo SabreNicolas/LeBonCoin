@@ -8,14 +8,21 @@ import java.awt.*;
 
 public class Entete extends JPanel{
 
-    public JPanel entete = new JPanel();
-    public JPanel boutons = new JPanel();
+    public JPanel entete;
+    public JPanel boutons;
 
-    public JLabel nomAppli = new JLabel(Strings.NOM_APPLI);
-    public JButton depotAnnonce = new JButton();
-    public JButton monCompte = new JButton();
+    public JLabel nomAppli;
+    public JButton depotAnnonce;
+    public JButton monCompte;
 
     public Entete() {
+        this.entete = new JPanel();
+        this.boutons = new JPanel();
+
+        this.nomAppli = new JLabel(Strings.NOM_APPLI);
+        this.depotAnnonce = new JButton();
+        this.monCompte = new JButton();
+
         this.entete.setLayout(new BorderLayout());
         this.entete.add(this.nomAppli, BorderLayout.WEST);
 
@@ -39,5 +46,10 @@ public class Entete extends JPanel{
         this.monCompte.setBorderPainted(false);
         this.monCompte.setBackground(Couleurs.BLEU);
         this.monCompte.setForeground(Couleurs.GRIS_CLAIR);
+
+        this.entete.setSize(new Dimension(250, 250));
+
+        this.entete.setVisible(true);
+        this.boutons.setVisible(true);
     }
 }

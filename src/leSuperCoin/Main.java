@@ -53,11 +53,17 @@ public class Main {
     }
     */
     public static void main(String[] args) {
+        JFrame f = new JFrame();
+
         Accueil a = new Accueil();
+        a.setSize(new Dimension(500, 500));
+        a.setBackground(Color.blue);
 
-        a.setVisible(true);
-        a.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        f.add(a);
 
-        a.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
+        f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
