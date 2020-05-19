@@ -1,55 +1,44 @@
 package leSuperCoin.view;
 
-import leSuperCoin.resources.Strings;
-import leSuperCoin.resources.Couleurs;
+import leSuperCoin.resources.Globals.*;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Entete extends JPanel{
 
-    public JPanel entete;
-    public JPanel boutons;
-
-    public JLabel nomAppli;
-    public JButton depotAnnonce;
-    public JButton monCompte;
-
     public Entete() {
-        this.entete = new JPanel();
-        this.boutons = new JPanel();
 
-        this.nomAppli = new JLabel(Strings.NOM_APPLI);
-        this.depotAnnonce = new JButton();
-        this.monCompte = new JButton();
+        this.setLayout(new BorderLayout());
 
-        this.entete.setLayout(new BorderLayout());
-        this.entete.add(this.nomAppli, BorderLayout.WEST);
+        JLabel nomAppli = new JLabel(Constans.NOM_APPLI);
+        nomAppli.setForeground(Colors.BLANC);
+        nomAppli.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 50));
+        this.add(nomAppli, BorderLayout.WEST);
 
-        this.boutons.setLayout(new BorderLayout());
-        this.entete.add(this.boutons, BorderLayout.EAST);
-        this.boutons.add(this.depotAnnonce, BorderLayout.WEST);
-        this.boutons.add(this.monCompte, BorderLayout.EAST);
+        JPanel boutons = new JPanel();
+        boutons.setLayout(new BorderLayout());
+        boutons.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 50));
+        this.add(boutons, BorderLayout.EAST);
 
-        this.entete.setBackground(Couleurs.BLEU);
-
-        this.nomAppli.setForeground(Couleurs.GRIS_CLAIR);
-
-        this.depotAnnonce.setText(Strings.DEPOT_ANNONCE_BTN);
+        JButton depotAnnonce = new JButton();
+        depotAnnonce.setText(Constans.DEPOT_ANNONCE_BTN);
         // Ajouter l'icone "plus.png"
-        this.depotAnnonce.setBorderPainted(false);
-        this.depotAnnonce.setBackground(Couleurs.BLEU);
-        this.depotAnnonce.setForeground(Couleurs.NOIR);
+        depotAnnonce.setBorderPainted(false);
+        depotAnnonce.setBackground(Colors.BLEU);
+        depotAnnonce.setForeground(Colors.NOIR);
+        boutons.add(depotAnnonce, BorderLayout.WEST);
 
-        this.monCompte.setText(Strings.MON_COMPTE_BTN);
+        JButton monCompte = new JButton();
+        monCompte.setText(Constans.MON_COMPTE_BTN);
         // Remplacer le texte par l'icone "utilisateur.png"
-        this.monCompte.setBorderPainted(false);
-        this.monCompte.setBackground(Couleurs.BLEU);
-        this.monCompte.setForeground(Couleurs.GRIS_CLAIR);
+        monCompte.setBorderPainted(false);
+        monCompte.setBackground(Colors.BLEU);
+        monCompte.setForeground(Colors.BLANC);
+        boutons.add(monCompte, BorderLayout.EAST);
 
-        this.entete.setSize(new Dimension(250, 250));
+        boutons.setVisible(true);
 
-        this.entete.setVisible(true);
-        this.boutons.setVisible(true);
+        this.setVisible(true);
     }
 }

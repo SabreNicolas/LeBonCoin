@@ -15,7 +15,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
-public class Main {
+public class Main extends JFrame {
     /*
     private static final SessionFactory ourSessionFactory;
 
@@ -53,17 +53,19 @@ public class Main {
     }
     */
     public static void main(String[] args) {
-        JFrame f = new JFrame();
 
+        new Main();
+    }
+
+    public Main() {
         Accueil a = new Accueil();
-        a.setSize(new Dimension(500, 500));
-        a.setBackground(Color.blue);
+        this.add(a);
 
-        f.add(a);
+        this.setSize(new Dimension(500, 500));
 
-        f.setVisible(true);
-        f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setBackground(Color.green);
+        this.setVisible(true);
     }
 }
