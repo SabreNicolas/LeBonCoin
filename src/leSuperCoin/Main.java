@@ -1,5 +1,6 @@
 package leSuperCoin;
 
+import leSuperCoin.resources.Globals.*;
 import leSuperCoin.view.Accueil;
 import leSuperCoin.view.Entete;
 import org.hibernate.HibernateException;
@@ -61,11 +62,10 @@ public class Main extends JFrame {
         Accueil a = new Accueil();
         this.add(a);
 
-        this.setSize(new Dimension(500, 500));
+        a.setBackground(Colors.BLANC);
 
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setBackground(Color.green);
         this.setVisible(true);
     }
 }

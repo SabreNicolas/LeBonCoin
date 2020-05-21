@@ -13,12 +13,12 @@ public class Entete extends JPanel{
 
         JLabel nomAppli = new JLabel(Constans.NOM_APPLI);
         nomAppli.setForeground(Colors.BLANC);
-        nomAppli.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 50));
+        nomAppli.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 25));
         this.add(nomAppli, BorderLayout.WEST);
 
         JPanel boutons = new JPanel();
         boutons.setLayout(new BorderLayout());
-        boutons.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 50));
+        boutons.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 25));
         this.add(boutons, BorderLayout.EAST);
 
         JButton depotAnnonce = new JButton();
