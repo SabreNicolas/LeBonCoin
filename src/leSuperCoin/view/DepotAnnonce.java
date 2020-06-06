@@ -4,6 +4,8 @@ import leSuperCoin.resources.Globals.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,21 +44,14 @@ public class DepotAnnonce extends JPanel {
         grid.weighty = 1;
         this.add(etape, grid);
 
-        List<> etapes = new ArrayList<>();
+        List<JPanel> etapes = new ArrayList<>();
 
         etapes.add(new DepotAnnonceEtapes.Categorie());
         etapes.add(new DepotAnnonceEtapes.Description());
         etapes.add(new DepotAnnonceEtapes.Prix());
         etapes.add(new DepotAnnonceEtapes.Recapitulatif());
 
-//        DepotAnnonceEtapes.Categorie categories = new DepotAnnonceEtapes.Categorie();
-//        etape.add(categories);
-//        DepotAnnonceEtapes.Description description = new DepotAnnonceEtapes.Description();
-//        etape.add(description);
-//        DepotAnnonceEtapes.Prix prix = new DepotAnnonceEtapes.Prix();
-//        etape.add(prix);
-//            DepotAnnonceEtapes.Recapitulatif recapitulatif = new DepotAnnonceEtapes.Recapitulatif();
-//            etape.add(recapitulatif);
+        etape.add(etapes.get(0));
 
         JButton etapeSuivante = new JButton(Constans.ETAPE_SUIVANTE);
         etapeSuivante.setForeground(Colors.BLANC);
@@ -65,6 +60,13 @@ public class DepotAnnonce extends JPanel {
         grid.gridy = 3;
         grid.weighty = 0.1;
         this.add(etapeSuivante, grid);
+
+        etapeSuivante.addActionListener(e -> {
+            etapeSuivante.setBackground(Colors.NOIR);
+            etape.remove(etapes.get(0));
+            etape.add(etapes.get(1));
+            etape.validate();
+        });
 
         this.setVisible(true);
     }

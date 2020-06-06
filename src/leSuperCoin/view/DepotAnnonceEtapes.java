@@ -29,6 +29,7 @@ public class DepotAnnonceEtapes extends JPanel {
             /* To Do :
                 - Faire une boucle qui affiche toutes les catégories
                 - Ajouter les icones (url : /ressources/images/categories/)
+                - Quand clic sur un bouton mettre fond à Colors.BLEU et texte à Colors.BLANC
              */
 
             grid.insets = new Insets(10, 25, 10, 25);
