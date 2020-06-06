@@ -2,6 +2,7 @@ package leSuperCoin;
 
 import leSuperCoin.resources.Globals.*;
 import leSuperCoin.view.Accueil;
+import leSuperCoin.view.Annonce;
 import leSuperCoin.view.Entete;
 import org.hibernate.HibernateException;
 import org.hibernate.Metamodel;
@@ -59,7 +60,8 @@ public class Main extends JFrame {
     }
 
     public Main() {
-        Accueil a = new Accueil();
+//        Accueil a = new Accueil();
+        Annonce a = new Annonce();
         this.add(a);
 
         a.setBackground(Colors.BLANC);

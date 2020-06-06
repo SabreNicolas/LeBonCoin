@@ -50,7 +50,7 @@ public class AnnonceItem extends JPanel {
 
         JTextArea description = new JTextArea();
         description.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis dui felis. Nullam commodo ullamcorper maximus. Praesent tincidunt vestibulum malesuada. Phasellus ultrices ligula vitae orci ultrices iaculis nec nec sapien. Nunc dapibus lobortis arcu, in luctus neque. Aenean at pulvinar turpis. Fusce ac orci lectus. Aenean eleifend auctor velit sit amet consequat. Nullam a nibh et felis posuere tincidunt. Suspendisse vel porttitor lectus, et sollicitudin eros. Quisque non augue ac ante placerat consequat.");
-        description.setFont(new Font(titre.getFont().getName(), Font.PLAIN, 15));
+        description.setFont(new Font(description.getFont().getName(), Font.PLAIN, 15));
         description.setForeground(Colors.NOIR);
         description.setBackground(Colors.GRIS_CLAIR);
         description.setLineWrap(true);

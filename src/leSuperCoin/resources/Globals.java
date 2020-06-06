@@ -18,6 +18,7 @@ public class Globals {
         public static final String MON_COMPTE_BTN = "Mon compte";
         public static final String LANCER_RECHERCHE = "Lancer la recherche";
         public static final String CHAMPS_RECHERCHE = "Que cherchez-vous ?";
+        public static final String TITRE_DESCRIPTION = "Description";
     }
 
     public static class  Images {
