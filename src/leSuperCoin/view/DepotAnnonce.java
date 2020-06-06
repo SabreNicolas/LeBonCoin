@@ -61,6 +61,11 @@ public class DepotAnnonce extends JPanel {
         grid.weighty = 0.1;
         this.add(etapeSuivante, grid);
 
+        /* To Do :
+            - Récupérer l'index de l'écran actuel
+            - Système d'incrémentation pour passer à l'écran suivant
+            - Valisdation à la dernière étape
+         */
         etapeSuivante.addActionListener(e -> {
             etapeSuivante.setBackground(Colors.NOIR);
             etape.remove(etapes.get(0));
