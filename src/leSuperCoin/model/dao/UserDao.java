@@ -1,6 +1,6 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.User;
+import leSuperCoin.model.entities.UserEntity;
 
-public interface UserDao extends Dao<User>{
+public interface UserDao extends Dao<UserEntity>{
 }

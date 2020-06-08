@@ -3,10 +3,6 @@ package test;
 import leSuperCoin.model.dao.*;
 import leSuperCoin.model.entities.*;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
 public class ListerAllEntitiesTest {
 
     public static void main(final String[] args) throws Exception {
@@ -20,45 +16,45 @@ public class ListerAllEntitiesTest {
         ValeurCritereDao valeurCritereManager = JpaDaoFactory.getDaoFactory(DaoFactory.PersistenceType.JPA).getValeurCritereDao();
 
         System.out.println("---------------");
-        System.out.println("----Annonce----");
+        System.out.println("----AnnonceEntity----");
         System.out.println("---------------");
-        for(Annonce t : annonceManager.findAll()) {
+        for(AnnonceEntity t : annonceManager.findAll()) {
             System.out.println(t);
         }
         System.out.println("---------------");
-        System.out.println("---Categorie---");
+        System.out.println("---CategorieEntity---");
         System.out.println("---------------");
-        for(Categorie c : categorieManager.findAll()) {
+        for(CategorieEntity c : categorieManager.findAll()) {
             System.out.println(c);
         }
         System.out.println("---------------");
-        System.out.println("----Critere----");
+        System.out.println("----CritereEntity----");
         System.out.println("---------------");
-        for(Critere c : critereManager.findAll()) {
+        for(CritereEntity c : critereManager.findAll()) {
             System.out.println(c);
         }
         System.out.println("---------------");
-        System.out.println("-----Photo-----");
+        System.out.println("-----PhotoEntity-----");
         System.out.println("---------------");
-        for(Photo p : photoManager.findAll()) {
+        for(PhotoEntity p : photoManager.findAll()) {
             System.out.println(p);
         }
         System.out.println("---------------");
-        System.out.println("--SurCategorie--");
+        System.out.println("--SurCategorieEntity--");
         System.out.println("---------------");
-        for(SurCategorie sc : surCategorieManager.findAll()) {
+        for(SurCategorieEntity sc : surCategorieManager.findAll()) {
             System.out.println(sc);
         }
         System.out.println("---------------");
-        System.out.println("------User-----");
+        System.out.println("------UserEntity-----");
         System.out.println("---------------");
-        for(User u : userManager.findAll()) {
+        for(UserEntity u : userManager.findAll()) {
             System.out.println(u);
         }
         System.out.println("---------------");
-        System.out.println("-ValeurCritere-");
+        System.out.println("-ValeurCritereEntity-");
         System.out.println("---------------");
-        for(ValeurCritere vc : valeurCritereManager.findAll()) {
+        for(ValeurCritereEntity vc : valeurCritereManager.findAll()) {
             System.out.println(vc);
         }
 

@@ -1,6 +1,6 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.SurCategorie;
+import leSuperCoin.model.entities.SurCategorieEntity;
 
-public interface SurCategorieDao extends Dao<SurCategorie> {
+public interface SurCategorieDao extends Dao<SurCategorieEntity> {
 }

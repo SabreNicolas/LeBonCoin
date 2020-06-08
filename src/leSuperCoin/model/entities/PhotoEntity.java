@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table( name = "photo",schema = "lesupercoin")
-public class Photo implements Serializable {
+public class PhotoEntity implements Serializable {
 
     @Id
     @Column(name = "idPhoto")
@@ -18,9 +18,9 @@ public class Photo implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="idAnnonce", referencedColumnName = "idAnnonce")
-    private Annonce annonce;
+    private AnnonceEntity annonceEntity;
 
-    public Photo() {
+    public PhotoEntity() {
     }
 
     public int getId() {
@@ -36,34 +36,34 @@ public class Photo implements Serializable {
         this.nom = nom;
     }
 
-    public Annonce getAnnonce() {
-        return annonce;
+    public AnnonceEntity getAnnonce() {
+        return annonceEntity;
     }
 
-    public void setAnnonce(Annonce annonce) {
-        this.annonce = annonce;
+    public void setAnnonce(AnnonceEntity annonceEntity) {
+        this.annonceEntity = this.annonceEntity;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Photo photo = (Photo) o;
-        return Objects.equals(nom, photo.nom) &&
-                Objects.equals(annonce, photo.annonce);
+        PhotoEntity photoEntity = (PhotoEntity) o;
+        return Objects.equals(nom, photoEntity.nom) &&
+                Objects.equals(annonceEntity, photoEntity.annonceEntity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nom, annonce);
+        return Objects.hash(nom, annonceEntity);
     }
 
     @Override
     public String toString() {
-        return "Photo{" +
+        return "PhotoEntity{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
-                ", annonce=" + annonce +
+                ", annonce=" + annonceEntity +
                 '}';
     }
 }

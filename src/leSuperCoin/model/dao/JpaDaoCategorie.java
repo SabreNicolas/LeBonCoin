@@ -1,14 +1,12 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Annonce;
-import leSuperCoin.model.entities.Categorie;
-import leSuperCoin.model.entities.Photo;
+import leSuperCoin.model.entities.CategorieEntity;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.Collection;
 
-public class JpaDaoCategorie extends JpaDao<Categorie> implements CategorieDao {
+public class JpaDaoCategorie extends JpaDao<CategorieEntity> implements CategorieDao {
 
     private static JpaDaoCategorie instance;
 
@@ -23,32 +21,32 @@ public class JpaDaoCategorie extends JpaDao<Categorie> implements CategorieDao {
     }
 
     @Override
-    public Categorie find(Class c, Integer id) {
-        return super.find(Categorie.class, id);
+    public CategorieEntity find(Class c, Integer id) {
+        return super.find(CategorieEntity.class, id);
     }
 
     @Override
-    public Collection<Categorie> findAll() {
-        Query query = session.createQuery("SELECT a FROM Categorie a");
-        return (Collection<Categorie>) query.getResultList();
+    public Collection<CategorieEntity> findAll() {
+        Query query = session.createQuery("SELECT a FROM CategorieEntity a");
+        return (Collection<CategorieEntity>) query.getResultList();
     }
 
     @Override
     public boolean deleteAll() {
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM Categorie a");
+        Query query = session.createQuery("DELETE FROM CategorieEntity a");
         query.executeUpdate();
         tx.commit();
         return true;
     }
 
     @Override
-    public boolean delete(Categorie obj) {
+    public boolean delete(CategorieEntity obj) {
         return super.delete(obj);
     }
 
-    public Collection<Categorie> findAllCategorieBySurCategorie(int i) {
-        Query query = session.createQuery("SELECT c FROM Categorie c WHERE c.surCategorie="+i);
-        return (Collection<Categorie>) query.getResultList();
+    public Collection<CategorieEntity> findAllCategorieBySurCategorie(int i) {
+        Query query = session.createQuery("SELECT c FROM CategorieEntity c WHERE c.surCategorieEntity="+i);
+        return (Collection<CategorieEntity>) query.getResultList();
     }
 }
