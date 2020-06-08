@@ -1,30 +1,41 @@
 package leSuperCoin.view;
 
-import com.sun.xml.bind.v2.runtime.reflect.opt.Const;
-import leSuperCoin.resources.Globals.*;
+import leSuperCoin.controller.DepotAnnonceController;
+import leSuperCoin.model.entities.CategorieEntity;
+import leSuperCoin.model.entities.CritereEntity;
+import leSuperCoin.model.entities.SurCategorieEntity;
+import leSuperCoin.resources.Globals.Colors;
+import leSuperCoin.resources.Globals.Constants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.function.Consumer;
 
 public class DepotAnnonceEtapes extends JPanel {
 
     public static class Categorie extends JPanel {
+        DepotAnnonceController form;
+        Consumer<Boolean> toggleEtapeSuivante;
+        GridBagConstraints grid;
 
-        public Categorie() {
+        JPanel surCategoriePanel;
+        JPanel categoriePanel;
+
+        GridBagConstraints surCategoriePanelGrid;
+        GridBagConstraints categoriePanelGrid;
+
+        public Categorie(DepotAnnonceController form, Consumer<Boolean> toggleEtapeSuivante) {
+            this.form = form;
+            this.toggleEtapeSuivante = toggleEtapeSuivante;
+
             this.setLayout(new GridBagLayout());
-            GridBagConstraints grid = new GridBagConstraints();
-            grid.fill = GridBagConstraints.BOTH;
+            this.grid = new GridBagConstraints();
+            this.grid.fill = GridBagConstraints.BOTH;
+            this.grid.anchor = GridBagConstraints.NORTH;
 
             this.setBackground(Colors.BLANC);
-
-            JLabel titreCategorie = new JLabel();
-            titreCategorie.setText(Constans.ETAPE_CATEGORIE);
-            titreCategorie.setFont(new Font(titreCategorie.getFont().getName(), Font.PLAIN, 15));
-            titreCategorie.setForeground(Colors.NOIR);
-            grid.gridx = 0;
-            grid.gridy = 0;
-            grid.anchor = GridBagConstraints.NORTH;
-            this.add(titreCategorie, grid);
 
             /* To Do :
                 - Faire une boucle qui affiche toutes les catégories
@@ -32,79 +43,127 @@ public class DepotAnnonceEtapes extends JPanel {
                 - Quand clic sur un bouton mettre fond à Colors.BLEU et texte à Colors.BLANC
              */
 
-            grid.insets = new Insets(10, 25, 10, 25);
+            this.grid.insets = new Insets(10, 25, 10, 25);
 
-            JButton automobile = new JButton();
-            automobile.setText(Constans.CATEGORIE_AUTOMOBILE);
-            automobile.setBorderPainted(false);
-            automobile.setBackground(Colors.GRIS_CLAIR);
-            grid.gridx = 0;
-            grid.gridy = 1;
-            this.add(automobile, grid);
+            this.addSurCategorie();
+            this.addCategorie();
 
-            JButton immobilier = new JButton();
-            immobilier.setText(Constans.CATEGORIE_IMMOBILIER);
-            immobilier.setBorderPainted(false);
-            immobilier.setBackground(Colors.GRIS_CLAIR);
-            grid.gridx = 0;
-            grid.gridy = 2;
-            this.add(immobilier, grid);
-
-            JButton multimedia = new JButton();
-            multimedia.setText(Constans.CATEGORIE_MULTIMEDIA);
-            multimedia.setBorderPainted(false);
-            multimedia.setBackground(Colors.GRIS_CLAIR);
-            grid.gridx = 0;
-            grid.gridy = 3;
-            this.add(multimedia, grid);
-
-            JButton materielPro = new JButton();
-            materielPro.setText(Constans.CATEGORIE_MATERIEL_PRO);
-            materielPro.setBorderPainted(false);
-            materielPro.setBackground(Colors.GRIS_CLAIR);
-            grid.gridx = 1;
-            grid.gridy = 1;
-            this.add(materielPro, grid);
-
-            JButton services = new JButton();
-            services.setText(Constans.CATEGORIE_SERVICES);
-            services.setBorderPainted(false);
-            services.setBackground(Colors.GRIS_CLAIR);
-            grid.gridx = 1;
-            grid.gridy = 2;
-            this.add(services, grid);
-
-            JButton mode = new JButton();
-            mode.setText(Constans.CATEGORIE_MODE);
-            mode.setBorderPainted(false);
-            mode.setBackground(Colors.GRIS_CLAIR);
-            grid.gridx = 1;
-            grid.gridy = 3;
-            this.add(mode, grid);
-
-            JButton loisirs = new JButton();
-            loisirs.setText(Constans.CATEGORIE_LOISIRS);
-            loisirs.setBorderPainted(false);
-            loisirs.setBackground(Colors.GRIS_CLAIR);
-            grid.gridx = 2;
-            grid.gridy = 1;
-            this.add(loisirs, grid);
-
-            JButton divers = new JButton();
-            divers.setText(Constans.CATEGORIE_DIVERS);
-            divers.setBorderPainted(false);
-            divers.setBackground(Colors.GRIS_CLAIR);
-            grid.gridx = 2;
-            grid.gridy = 2;
-            this.add(divers, grid);
+            this.updateSurCategorie();
 
             this.setVisible(true);
+        }
+
+        private void addSurCategorie() {
+            this.surCategoriePanel = new JPanel();
+            this.surCategoriePanel.setLayout(new GridBagLayout());
+            this.surCategoriePanelGrid = new GridBagConstraints();
+            this.surCategoriePanelGrid.fill = GridBagConstraints.BOTH;
+            this.surCategoriePanelGrid.insets = new Insets(100, 250, 100, 250);
+            this.grid.gridx = 1;
+            this.grid.gridy = 1;
+            this.add(this.surCategoriePanel, this.grid);
+        }
+
+        private void updateSurCategorie() {
+            this.surCategoriePanel.removeAll();
+            this.surCategoriePanel.repaint();
+            this.surCategoriePanelGrid.insets = new Insets(0, 0, 0, 0);
+
+            JLabel titreSurCategorie = new JLabel();
+            titreSurCategorie.setText(Constants.ETAPE_CATEGORIE);
+            titreSurCategorie.setFont(new Font(titreSurCategorie.getFont().getName(), Font.PLAIN, 15));
+            titreSurCategorie.setForeground(Colors.NOIR);
+            this.surCategoriePanelGrid.gridx = 0;
+            this.surCategoriePanelGrid.gridy = 0;
+            this.surCategoriePanel.add(titreSurCategorie, this.surCategoriePanelGrid);
+
+            int coords = 0;
+            for (SurCategorieEntity surCategorieEntity : this.form.getController().getModel().getSurCategories()) {
+                JButton surCategorie = new JButton();
+                surCategorie.setText(surCategorieEntity.getNom());
+                surCategorie.setBorderPainted(false);
+                surCategorie.setBackground(this.form.getSurCategorie() == surCategorieEntity ? Colors.BLEU : Colors.GRIS_CLAIR);
+                surCategorie.addActionListener(e -> {
+                    this.form.setSurCategorie(surCategorieEntity);
+                    this.updateCategorie();
+                    this.updateSurCategorie();
+                });
+                this.surCategoriePanelGrid.gridx = coords / 3;
+                this.surCategoriePanelGrid.gridy = coords % 3 + 1;
+                this.surCategoriePanel.add(surCategorie, this.surCategoriePanelGrid);
+                coords++;
+            }
+
+            this.surCategoriePanel.validate();
+            this.surCategoriePanel.repaint();
+            this.validate();
+            this.repaint();
+        }
+
+        private void addCategorie() {
+            this.categoriePanel = new JPanel();
+            this.categoriePanel.setLayout(new GridBagLayout());
+            this.categoriePanelGrid = new GridBagConstraints();
+            this.categoriePanelGrid.fill = GridBagConstraints.BOTH;
+            this.categoriePanelGrid.insets = new Insets(100, 250, 100, 250);
+            this.grid.gridx = 1;
+            this.grid.gridy = 2;
+            this.add(this.categoriePanel, this.grid);
+
+            JLabel titreCategorie = new JLabel();
+            titreCategorie.setText(Constants.ETAPE_SOUS_CATEGORIE);
+            titreCategorie.setFont(new Font(titreCategorie.getFont().getName(), Font.PLAIN, 15));
+            titreCategorie.setForeground(Colors.NOIR);
+            this.categoriePanelGrid.gridx = 0;
+            this.categoriePanelGrid.gridy = 0;
+            this.categoriePanel.add(titreCategorie, this.categoriePanelGrid);
+        }
+
+        private void updateCategorie() {
+            this.categoriePanel.removeAll();
+            this.categoriePanel.repaint();
+            this.categoriePanelGrid.insets = new Insets(0, 0, 0, 0);
+
+            JLabel titreCategorie = new JLabel();
+            titreCategorie.setText(Constants.ETAPE_CATEGORIE);
+            titreCategorie.setFont(new Font(titreCategorie.getFont().getName(), Font.PLAIN, 15));
+            titreCategorie.setForeground(Colors.NOIR);
+            this.categoriePanelGrid.gridx = 0;
+            this.categoriePanelGrid.gridy = 0;
+            this.categoriePanel.add(titreCategorie, this.categoriePanelGrid);
+
+            int coords = 0;
+            for (CategorieEntity categorieEntity : this.form.getController().getModel().getCategoriesOf(this.form.getSurCategorie())) {
+                JButton categorie = new JButton();
+                categorie.setText(categorieEntity.getNom());
+                categorie.setBorderPainted(false);
+                categorie.setBackground(this.form.getCategorie() == categorieEntity ? Colors.BLEU : Colors.GRIS_CLAIR);
+                categorie.addActionListener(e -> {
+                    this.form.setCategorie(categorieEntity);
+                    this.updateCategorie();
+                    this.toggleEtapeSuivante.accept(true);
+                });
+                this.categoriePanelGrid.gridx = coords / 3;
+                this.categoriePanelGrid.gridy = coords % 3 + 1;
+                this.categoriePanel.add(categorie, this.categoriePanelGrid);
+                coords++;
+            }
+
+            this.categoriePanel.validate();
+            this.categoriePanel.repaint();
+            this.validate();
+            this.repaint();
         }
     }
 
     public static class Description extends JPanel {
+        DepotAnnonceController form;
+        Consumer<Boolean> toggleEtapeSuivante;
 
-        public Description() {
+        public Description(DepotAnnonceController form, Consumer<Boolean> toggleEtapeSuivante) {
+            this.form = form;
+            this.toggleEtapeSuivante = toggleEtapeSuivante;
+
             this.setLayout(new GridBagLayout());
             GridBagConstraints grid = new GridBagConstraints();
             grid.fill = GridBagConstraints.BOTH;
@@ -112,7 +171,7 @@ public class DepotAnnonceEtapes extends JPanel {
             this.setBackground(Colors.BLANC);
 
             JLabel titreDescription = new JLabel();
-            titreDescription.setText(Constans.ETAPE_DESCRIPTION);
+            titreDescription.setText(Constants.ETAPE_DESCRIPTION);
             titreDescription.setFont(new Font(titreDescription.getFont().getName(), Font.PLAIN, 15));
             titreDescription.setForeground(Colors.NOIR);
             grid.gridx = 0;
@@ -122,8 +181,8 @@ public class DepotAnnonceEtapes extends JPanel {
 
             grid.insets = new Insets(10, 25, 10, 25);
 
-            JLabel labelTitre = new JLabel();;
-            labelTitre.setText(Constans.ANNONCE_TITRE);
+            /*JLabel labelTitre = new JLabel();
+            labelTitre.setText(Constants.ANNONCE_TITRE);
             grid.gridx = 0;
             grid.gridy = 1;
             grid.anchor = GridBagConstraints.NORTH;
@@ -132,13 +191,32 @@ public class DepotAnnonceEtapes extends JPanel {
             JTextField inputTitre = new JTextField();
             inputTitre.setPreferredSize(new Dimension(250, 20));
             inputTitre.setBorder(BorderFactory.createLineBorder(Colors.NOIR, 1));
+            inputTitre.addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    form.setTitre(inputTitre.getText());
+                    if (form.getTitre() != null && form.getDescription() != null) {
+                        toggleEtapeSuivante.accept(true);
+                    }
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+
+                }
+            });
             grid.gridx = 1;
             grid.gridy = 1;
             grid.anchor = GridBagConstraints.NORTH;
-            this.add(inputTitre, grid);
+            this.add(inputTitre, grid);*/
 
-            JLabel labelDescription = new JLabel();;
-            labelDescription.setText(Constans.ANNONCE_DESCRIPTION);
+            JLabel labelDescription = new JLabel();
+            labelDescription.setText(Constants.ANNONCE_DESCRIPTION);
             grid.gridx = 0;
             grid.gridy = 2;
             grid.anchor = GridBagConstraints.NORTH;
@@ -149,6 +227,23 @@ public class DepotAnnonceEtapes extends JPanel {
             inputDescription.setWrapStyleWord(true);
             inputDescription.setPreferredSize(new Dimension(250, 150));
             inputDescription.setBorder(BorderFactory.createLineBorder(Colors.NOIR, 1));
+            inputDescription.addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                }
+
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    form.setDescription(inputDescription.getText());
+                    if (/*form.getTitre() != null &&*/ form.getDescription() != null) {
+                        toggleEtapeSuivante.accept(true);
+                    }
+                }
+            });
             grid.gridx = 1;
             grid.gridy = 2;
             grid.anchor = GridBagConstraints.NORTH;
@@ -158,40 +253,70 @@ public class DepotAnnonceEtapes extends JPanel {
         }
     }
 
-    public static class Prix extends JPanel {
+    public static class Criteres extends JPanel {
+        DepotAnnonceController form;
+        Consumer<Boolean> toggleEtapeSuivante;
+        GridBagConstraints grid;
 
-        public Prix() {
+        public Criteres(DepotAnnonceController form, Consumer<Boolean> toggleEtapeSuivante) {
+            this.form = form;
+            this.toggleEtapeSuivante = toggleEtapeSuivante;
+
             this.setLayout(new GridBagLayout());
-            GridBagConstraints grid = new GridBagConstraints();
-            grid.fill = GridBagConstraints.BOTH;
+            this.grid = new GridBagConstraints();
+            this.grid.fill = GridBagConstraints.BOTH;
 
             this.setBackground(Colors.BLANC);
 
             JLabel titreDescription = new JLabel();
-            titreDescription.setText(Constans.ETAPE_PRIX);
+            titreDescription.setText(Constants.ETAPE_CRITERES);
             titreDescription.setFont(new Font(titreDescription.getFont().getName(), Font.PLAIN, 15));
             titreDescription.setForeground(Colors.NOIR);
-            grid.gridx = 0;
-            grid.gridy = 0;
-            grid.anchor = GridBagConstraints.NORTH;
+            this.grid.gridx = 0;
+            this.grid.gridy = 0;
+            this.grid.anchor = GridBagConstraints.NORTH;
             this.add(titreDescription, grid);
 
             grid.insets = new Insets(10, 25, 10, 25);
 
-            JLabel labelPrix = new JLabel();;
-            labelPrix.setText(Constans.ANNONCE_PRIX);
-            grid.gridx = 0;
-            grid.gridy = 1;
-            grid.anchor = GridBagConstraints.NORTH;
-            this.add(labelPrix, grid);
+            this.addCriteres();
+        }
 
-            JTextField inputPrix = new JTextField();
-            inputPrix.setPreferredSize(new Dimension(250, 20));
-            inputPrix.setBorder(BorderFactory.createLineBorder(Colors.NOIR, 1));
-            grid.gridx = 1;
-            grid.gridy = 1;
-            grid.anchor = GridBagConstraints.NORTH;
-            this.add(inputPrix, grid);
+        void addCriteres() {
+            int y = 1;
+            for (CritereEntity critereEntity : this.form.getController().getModel().getCriteresOf(this.form.getSurCategorie())) {
+                JLabel label = new JLabel();
+
+                label.setText(critereEntity.getNomCritere());
+                this.grid.gridx = 0;
+                this.grid.gridy = y;
+                this.grid.anchor = GridBagConstraints.NORTH;
+                this.add(label, grid);
+
+                JTextField input = new JTextField();
+                input.setPreferredSize(new Dimension(250, 20));
+                input.setBorder(BorderFactory.createLineBorder(Colors.NOIR, 1));
+                input.addKeyListener(new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+                        toggleEtapeSuivante.accept(true);
+                        form.setCritere(critereEntity, input.getText());
+                    }
+                });
+                grid.gridx = 1;
+                grid.gridy = y++;
+                grid.anchor = GridBagConstraints.NORTH;
+                this.add(input, grid);
+            }
         }
     }
 
@@ -201,43 +326,4 @@ public class DepotAnnonceEtapes extends JPanel {
 
         }
     }
-
-    public static class Recapitulatif extends JPanel {
-
-        public Recapitulatif() {
-            this.setLayout(new GridBagLayout());
-            GridBagConstraints grid = new GridBagConstraints();
-            grid.fill = GridBagConstraints.BOTH;
-
-            JLabel titreCategorie = new JLabel();
-            titreCategorie.setText(Constans.ETAPE_RECAPITULATIF);
-            titreCategorie.setFont(new Font(titreCategorie.getFont().getName(), Font.PLAIN, 15));
-            titreCategorie.setForeground(Colors.NOIR);
-            grid.gridx = 0;
-            grid.gridy = 0;
-            grid.anchor = GridBagConstraints.NORTH;
-            this.add(titreCategorie, grid);
-
-            Categorie categorie = new Categorie();
-            grid.gridx = 0;
-            grid.gridy = 1;
-            grid.anchor = GridBagConstraints.NORTH;
-            this.add(categorie, grid);
-
-            Description description = new Description();
-            grid.gridx = 0;
-            grid.gridy = 2;
-            grid.anchor = GridBagConstraints.NORTH;
-            this.add(description, grid);
-
-            Prix prix = new Prix();
-            grid.gridx = 0;
-            grid.gridy = 3;
-            grid.anchor = GridBagConstraints.NORTH;
-            this.add(prix, grid);
-
-            this.setVisible(true);
-        }
-    }
-
 }

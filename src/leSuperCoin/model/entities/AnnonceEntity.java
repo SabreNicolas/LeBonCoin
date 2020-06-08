@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table( name = "annonce",schema = "lesupercoin")
-public class Annonce implements Serializable {
+public class AnnonceEntity implements Serializable {
 
     @Id
     @Column(name = "idAnnonce")
@@ -16,11 +16,11 @@ public class Annonce implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="idUser", referencedColumnName = "idUser")
-    private User utilisateur;
+    private UserEntity utilisateur;
 
     @ManyToOne
     @JoinColumn(name="idCategorie", referencedColumnName = "idCategorie")
-    private Categorie categorie;
+    private CategorieEntity categorieEntity;
 
     @Column(name = "statut" )
     private boolean statut;
@@ -28,7 +28,7 @@ public class Annonce implements Serializable {
     @Column(name = "description" )
     private String description;
 
-    public Annonce() {
+    public AnnonceEntity() {
     }
 
     public int getId() {
@@ -36,20 +36,20 @@ public class Annonce implements Serializable {
     }
 
 
-    public User getUtilisateur() {
+    public UserEntity getUtilisateur() {
         return utilisateur;
     }
 
-    public void setUtilisateur(User utilisateur) {
+    public void setUtilisateur(UserEntity utilisateur) {
         this.utilisateur = utilisateur;
     }
 
-    public Categorie getCategorie() {
-        return categorie;
+    public CategorieEntity getCategorieEntity() {
+        return categorieEntity;
     }
 
-    public void setCategorie(Categorie categorie) {
-        this.categorie = categorie;
+    public void setCategorieEntity(CategorieEntity categorieEntity) {
+        this.categorieEntity = categorieEntity;
     }
 
     public boolean isStatut() {
@@ -72,24 +72,24 @@ public class Annonce implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Annonce annonce = (Annonce) o;
-        return statut == annonce.statut &&
-                Objects.equals(utilisateur, annonce.utilisateur) &&
-                Objects.equals(categorie, annonce.categorie) &&
-                Objects.equals(description, annonce.description);
+        AnnonceEntity annonceEntity = (AnnonceEntity) o;
+        return statut == annonceEntity.statut &&
+                Objects.equals(utilisateur, annonceEntity.utilisateur) &&
+                Objects.equals(categorieEntity, annonceEntity.categorieEntity) &&
+                Objects.equals(description, annonceEntity.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(utilisateur, categorie, statut, description);
+        return Objects.hash(utilisateur, categorieEntity, statut, description);
     }
 
     @Override
     public String toString() {
-        return "Annonce{" +
+        return "AnnonceEntity{" +
                 "id=" + id +
                 ", utilisateur=" + utilisateur +
-                ", categorie=" + categorie +
+                ", categorieEntity=" + categorieEntity +
                 ", statut=" + statut +
                 ", description='" + description + '\'' +
                 '}';

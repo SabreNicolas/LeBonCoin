@@ -1,18 +1,44 @@
 package leSuperCoin.view;
 
+import leSuperCoin.controller.Controller;
+import leSuperCoin.model.entities.AnnonceEntity;
+import leSuperCoin.model.entities.ValeurCritereEntity;
 import leSuperCoin.resources.Globals.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Collection;
 
 public class Annonce extends JPanel {
+    Controller controller;
+    AnnonceEntity annonceEntity;
+    Collection<ValeurCritereEntity> valeurCritereEntities;
 
-    public Annonce() {
+    public Annonce(Controller controller, AnnonceEntity annonceEntity) {
+        this.controller = controller;
+        this.annonceEntity = annonceEntity;
+        this.valeurCritereEntities = this.controller.getModel().getValeurCriteresOf(annonceEntity);
+
+        String titre = "???";
+        String prix = "???";
+        for (ValeurCritereEntity valeurCritereEntity : valeurCritereEntities) {
+           switch(valeurCritereEntity.getCritereEntity().getNomCritere()){
+               case "Titre":
+                   titre = valeurCritereEntity.getValeur();
+                   break;
+               case "Prix":
+                   prix = valeurCritereEntity.getValeur();
+                   break;
+           }
+        }
+
         this.setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.BOTH;
 
-        Entete entete = new Entete();
+        Entete entete = new Entete(controller);
         entete.setBackground(Colors.BLEU);
         grid.weightx = 1;
         grid.gridwidth = 3;
@@ -27,15 +53,41 @@ public class Annonce extends JPanel {
         grid.gridy = 1;
         grid.weighty = 0.2;
         grid.insets = new Insets(25, 250, 0, 250);
+        retour.addMouseListener((new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                controller.getView().navigate(View.Target.ACCUEIL);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        }));
         this.add(retour, grid);
 
         /* Images */
-        JPanel annonceImages = new JPanel();
+        /*JPanel annonceImages = new JPanel();
         grid.gridx = 0;
         grid.gridy = 2;
         grid.weighty = 1;
         annonceImages.setBackground(Colors.GRIS_CLAIR);
-        this.add(annonceImages, grid);
+        this.add(annonceImages, grid);*/
 
         /* Titre et prix */
         JPanel annonceDetail = new JPanel();
@@ -50,7 +102,7 @@ public class Annonce extends JPanel {
         gridAnnonceDetail.fill = GridBagConstraints.BASELINE;
 
         JLabel titreAnnonce = new JLabel();
-        titreAnnonce.setText("Titre de l'annonce");
+        titreAnnonce.setText(titre);
         titreAnnonce.setFont(new Font(titreAnnonce.getFont().getName(), Font.PLAIN, 30));
         titreAnnonce.setForeground(Colors.NOIR);
         gridAnnonceDetail.gridx = 0;
@@ -66,7 +118,7 @@ public class Annonce extends JPanel {
         this.add(new JLabel(), gridAnnonceDetail);
 
         JLabel prixAnnonce = new JLabel();
-        prixAnnonce.setText("100€");
+        prixAnnonce.setText(prix + " €");
         prixAnnonce.setFont(new Font(prixAnnonce.getFont().getName(), Font.PLAIN, 30));
         prixAnnonce.setForeground(Colors.BLEU);
         gridAnnonceDetail.gridx = 2;
@@ -99,7 +151,7 @@ public class Annonce extends JPanel {
         annonceDescription.add(titreDescription, gridAnnonceDescription);
 
         JTextArea texteDescription = new JTextArea();
-        texteDescription.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis dui felis. Nullam commodo ullamcorper maximus. Praesent tincidunt vestibulum malesuada. Phasellus ultrices ligula vitae orci ultrices iaculis nec nec sapien. Nunc dapibus lobortis arcu, in luctus neque. Aenean at pulvinar turpis. Fusce ac orci lectus. Aenean eleifend auctor velit sit amet consequat. Nullam a nibh et felis posuere tincidunt. Suspendisse vel porttitor lectus, et sollicitudin eros. Quisque non augue ac ante placerat consequat.");
+        texteDescription.setText(annonceEntity.getDescription());
         texteDescription.setFont(new Font(texteDescription.getFont().getName(), Font.PLAIN, 15));
         texteDescription.setForeground(Colors.NOIR);
         texteDescription.setBackground(Colors.BLANC);
@@ -150,7 +202,32 @@ public class Annonce extends JPanel {
         gridAnnonceInfoVendeur.gridwidth = 2;
         gridAnnonceInfoVendeur.weightx = 1;
         annonceInfoVendeur.add(texteInfoVendeur, gridAnnonceInfoVendeur);
-        
+
+
+        int y = 6;
+        for (ValeurCritereEntity valeurCritereEntity : valeurCritereEntities) {
+            JPanel panel = new JPanel();
+
+            JLabel label = new JLabel();
+            label.setText(valeurCritereEntity.getCritereEntity().getNomCritere());
+            label.setForeground(Colors.NOIR);
+            grid.gridx = 1;
+            grid.gridy = 0;
+            grid.weightx = 0.2;
+            panel.add(label, grid);
+
+            JLabel valeur = new JLabel();
+            valeur.setText(valeurCritereEntity.getValeur());
+            valeur.setForeground(Colors.NOIR);
+            grid.gridx = 2;
+            grid.gridy = 0;
+            panel.add(valeur, grid);
+
+            grid.gridx = 0;
+            grid.gridy = y++;
+            this.add(panel, grid);
+        }
+
         this.setVisible(true);
     }
 }

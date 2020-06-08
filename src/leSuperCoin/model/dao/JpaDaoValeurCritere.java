@@ -1,14 +1,12 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Annonce;
-import leSuperCoin.model.entities.User;
-import leSuperCoin.model.entities.ValeurCritere;
+import leSuperCoin.model.entities.ValeurCritereEntity;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.Collection;
 
-public class JpaDaoValeurCritere extends JpaDao<ValeurCritere> implements ValeurCritereDao {
+public class JpaDaoValeurCritere extends JpaDao<ValeurCritereEntity> implements ValeurCritereDao {
 
     private static JpaDaoValeurCritere instance;
 
@@ -23,33 +21,33 @@ public class JpaDaoValeurCritere extends JpaDao<ValeurCritere> implements Valeur
     }
 
     @Override
-    public ValeurCritere find(Class c, Integer id) {
-        return super.find(ValeurCritere.class, id);
+    public ValeurCritereEntity find(Class c, Integer id) {
+        return super.find(ValeurCritereEntity.class, id);
     }
 
     @Override
-    public Collection<ValeurCritere> findAll() {
-        Query query = session.createQuery("SELECT a FROM ValeurCritere a");
-        return (Collection<ValeurCritere>) query.getResultList();
+    public Collection<ValeurCritereEntity> findAll() {
+        Query query = session.createQuery("SELECT a FROM ValeurCritereEntity a");
+        return (Collection<ValeurCritereEntity>) query.getResultList();
     }
 
     @Override
     public boolean deleteAll() {
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM ValeurCritere a");
+        Query query = session.createQuery("DELETE FROM ValeurCritereEntity a");
         query.executeUpdate();
         tx.commit();
         return true;
     }
 
     @Override
-    public boolean delete(ValeurCritere obj) {
+    public boolean delete(ValeurCritereEntity obj) {
         return super.delete(obj);
     }
 
 
-    public Collection<ValeurCritere> findAllValeurCritereByAnnonce(int i) {
-        Query query = session.createQuery("SELECT v FROM ValeurCritere v WHERE v.annonce="+i);
-        return (Collection<ValeurCritere>) query.getResultList();
+    public Collection<ValeurCritereEntity> findAllValeurCritereByAnnonce(int i) {
+        Query query = session.createQuery("SELECT v FROM ValeurCritereEntity v WHERE v.annonceEntity="+i);
+        return (Collection<ValeurCritereEntity>) query.getResultList();
     }
 }

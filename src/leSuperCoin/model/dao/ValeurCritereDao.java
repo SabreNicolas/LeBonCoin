@@ -1,10 +1,10 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.ValeurCritere;
+import leSuperCoin.model.entities.ValeurCritereEntity;
 
 import java.util.Collection;
 
-public interface ValeurCritereDao extends Dao<ValeurCritere>{
+public interface ValeurCritereDao extends Dao<ValeurCritereEntity>{
 
-    public Collection<ValeurCritere> findAllValeurCritereByAnnonce(int i);
+    public Collection<ValeurCritereEntity> findAllValeurCritereByAnnonce(int i);
 }

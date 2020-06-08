@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table( name = "surcategorie",schema = "lesupercoin")
-public class SurCategorie implements Serializable {
+public class SurCategorieEntity implements Serializable {
 
     @Id
     @Column(name = "idSurCategorie")
@@ -16,7 +16,7 @@ public class SurCategorie implements Serializable {
     @Column(name = "nomSurCategorie")
     private String nom;
 
-    public SurCategorie() {
+    public SurCategorieEntity() {
     }
 
     public int getId() {
@@ -35,7 +35,7 @@ public class SurCategorie implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SurCategorie that = (SurCategorie) o;
+        SurCategorieEntity that = (SurCategorieEntity) o;
         return Objects.equals(nom, that.nom);
     }
 
@@ -46,7 +46,7 @@ public class SurCategorie implements Serializable {
 
     @Override
     public String toString() {
-        return "SurCategorie{" +
+        return "SurCategorieEntity{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 '}';

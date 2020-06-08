@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table( name = "valeurcritere",schema = "lesupercoin")
-public class ValeurCritere implements Serializable {
+public class ValeurCritereEntity implements Serializable {
 
 
     @Column(name = "value")
@@ -15,18 +15,18 @@ public class ValeurCritere implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name="annonce_idAnnonce", referencedColumnName = "idAnnonce")
-    private Annonce annonce;
+    private AnnonceEntity annonceEntity;
 
     @Id
     @ManyToOne
     @JoinColumn(name="critere_idCritere", referencedColumnName = "idCritere")
-    private Critere critere;
+    private CritereEntity critereEntity;
 
-    public ValeurCritere() {
+    public ValeurCritereEntity() {
     }
 
     public int getId() {
-        return annonce.getId();
+        return annonceEntity.getId();
     }
     public String getValeur() {
         return valeur;
@@ -36,44 +36,44 @@ public class ValeurCritere implements Serializable {
         this.valeur = valeur;
     }
 
-    public Annonce getAnnonce() {
-        return annonce;
+    public AnnonceEntity getAnnonceEntity() {
+        return annonceEntity;
     }
 
-    public void setAnnonce(Annonce annonce) {
-        this.annonce = annonce;
+    public void setAnnonceEntity(AnnonceEntity annonceEntity) {
+        this.annonceEntity = annonceEntity;
     }
 
-    public Critere getCritere() {
-        return critere;
+    public CritereEntity getCritereEntity() {
+        return critereEntity;
     }
 
-    public void setCritere(Critere critere) {
-        this.critere = critere;
+    public void setCritereEntity(CritereEntity critereEntity) {
+        this.critereEntity = critereEntity;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ValeurCritere that = (ValeurCritere) o;
+        ValeurCritereEntity that = (ValeurCritereEntity) o;
         return Objects.equals(valeur, that.valeur) &&
-                Objects.equals(annonce, that.annonce) &&
-                Objects.equals(critere, that.critere);
+                Objects.equals(annonceEntity, that.annonceEntity) &&
+                Objects.equals(critereEntity, that.critereEntity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(valeur, annonce, critere);
+        return Objects.hash(valeur, annonceEntity, critereEntity);
     }
 
     @Override
     public String toString() {
-        return "ValeurCritere{" +
+        return "ValeurCritereEntity{" +
                 "id=" + getId() +
                 ", valeur='" + valeur + '\'' +
-                ", annonce=" + annonce +
-                ", critere=" + critere +
+                ", annonceEntity=" + annonceEntity +
+                ", critereEntity=" + critereEntity +
                 '}';
     }
 }

@@ -1,5 +1,6 @@
 package leSuperCoin.view;
 
+import leSuperCoin.controller.Controller;
 import leSuperCoin.resources.Globals.*;
 
 import javax.swing.*;
@@ -7,11 +8,12 @@ import java.awt.*;
 
 public class Entete extends JPanel{
 
-    public Entete() {
+    public Entete(Controller controller) {
 
         this.setLayout(new BorderLayout());
+        this.setBackground(Colors.BLEU);
 
-        JLabel nomAppli = new JLabel(Constans.NOM_APPLI);
+        JLabel nomAppli = new JLabel(Constants.NOM_APPLI);
         nomAppli.setForeground(Colors.BLANC);
         nomAppli.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 25));
         this.add(nomAppli, BorderLayout.WEST);
@@ -22,15 +24,19 @@ public class Entete extends JPanel{
         this.add(boutons, BorderLayout.EAST);
 
         JButton depotAnnonce = new JButton();
-        depotAnnonce.setText(Constans.DEPOT_ANNONCE_BTN);
+        depotAnnonce.setText(Constants.DEPOT_ANNONCE_BTN);
         // Ajouter l'icone "plus.png"
         depotAnnonce.setBorderPainted(false);
         depotAnnonce.setBackground(Colors.BLEU);
         depotAnnonce.setForeground(Colors.NOIR);
+        depotAnnonce.addActionListener(e -> {
+            depotAnnonce.setBackground(Colors.NOIR);
+            controller.getView().navigate(View.Target.DEPOT_ANNONCE);
+        });
         boutons.add(depotAnnonce, BorderLayout.WEST);
 
         JButton monCompte = new JButton();
-        monCompte.setText(Constans.MON_COMPTE_BTN);
+        monCompte.setText(Constants.MON_COMPTE_BTN);
         // Remplacer le texte par l'icone "utilisateur.png"
         monCompte.setBorderPainted(false);
         monCompte.setBackground(Colors.BLEU);
