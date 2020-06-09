@@ -81,11 +81,10 @@ public class Model {
     }
 
     public boolean login(String login, String password) {
-        for (UserEntity user : this.userManager.findAll()) {
-            if (user.getLogin() == login && user.getMotDePasse() == password) {
-                this.currentUser = user;
-                return true;
-            }
+        UserEntity userEntity = this.userManager.findUserByLoginAndPasse(login, password);
+        if (userEntity != null) {
+            this.currentUser = userEntity;
+            return true;
         }
         return false;
     }
