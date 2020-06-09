@@ -1,8 +1,6 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Critere;
-import leSuperCoin.model.entities.SurCategorie;
-import leSuperCoin.model.entities.User;
+import leSuperCoin.model.entities.UserEntity;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
@@ -48,8 +46,8 @@ public class JpaDaoUser extends JpaDao<UserEntity> implements UserDao {
     }
 
 
-    public User findUserByLoginAndPasse(String login , String passe) {
-        Query query = session.createQuery("SELECT u FROM User u WHERE u.login="+login+" AND u.motDePasse="+passe);
-        return (User) query.getSingleResult();
+    public UserEntity findUserByLoginAndPasse(String login , String passe) {
+        Query query = session.createQuery("SELECT u FROM UserEntity u WHERE u.login="+login+" AND u.motDePasse="+passe);
+        return (UserEntity) query.getSingleResult();
     }
 }

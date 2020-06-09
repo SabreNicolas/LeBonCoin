@@ -1,11 +1,10 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.User;
-import leSuperCoin.model.entities.ValeurCritere;
+import leSuperCoin.model.entities.UserEntity;
 
 import java.util.Collection;
 
-public interface UserDao extends Dao<User>{
+public interface UserDao extends Dao<UserEntity>{
 
-    public User findUserByLoginAndPasse(String login,String mdp);
+    public UserEntity findUserByLoginAndPasse(String login, String mdp);
 }
