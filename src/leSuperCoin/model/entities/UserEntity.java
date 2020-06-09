@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table( name = "user",schema = "lesupercoin")
-public class User implements Serializable {
+public class UserEntity implements Serializable {
 
     @Id
     @Column(name="idUser")
@@ -28,7 +28,7 @@ public class User implements Serializable {
     @Column(name="mail")
     private String mail;
 
-    public User() {
+    public UserEntity() {
     }
 
     public int getId() {
@@ -79,8 +79,8 @@ public class User implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(login, user.login);
+        UserEntity userEntity = (UserEntity) o;
+        return Objects.equals(login, userEntity.login);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserEntity{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
                 ", prenom='" + prenom + '\'' +

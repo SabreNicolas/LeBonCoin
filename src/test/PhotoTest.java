@@ -3,7 +3,7 @@ package test;
 import leSuperCoin.model.dao.DaoFactory;
 import leSuperCoin.model.dao.JpaDaoFactory;
 import leSuperCoin.model.dao.PhotoDao;
-import leSuperCoin.model.entities.Photo;
+import leSuperCoin.model.entities.PhotoEntity;
 
 public class PhotoTest {
 
@@ -13,9 +13,9 @@ public class PhotoTest {
         PhotoDao photoManager = JpaDaoFactory.getDaoFactory(DaoFactory.PersistenceType.JPA).getPhotoDao();
 
         System.out.println("---------------");
-        System.out.println("-Photo by annonce-");
+        System.out.println("-PhotoEntity by annonce-");
         System.out.println("---------------");
-        for(Photo p : photoManager.findAllPhotoByAnnonce(3)) {
+        for(PhotoEntity p : photoManager.findAllPhotoByAnnonce(3)) {
             System.out.println(p);
         }
 

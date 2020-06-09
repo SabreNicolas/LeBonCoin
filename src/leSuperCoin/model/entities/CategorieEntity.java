@@ -6,7 +6,7 @@ import java.util.Objects;
 
 @Entity
 @Table( name = "categorie",schema = "lesupercoin")
-public class Categorie implements Serializable {
+public class CategorieEntity implements Serializable {
 
     @Id
     @Column(name = "idCategorie")
@@ -18,9 +18,9 @@ public class Categorie implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="idSurCategorie", referencedColumnName = "idSurCategorie")
-    private SurCategorie surCategorie;
+    private SurCategorieEntity surCategorieEntity;
 
-    public Categorie() {
+    public CategorieEntity() {
     }
 
     public int getId() {
@@ -34,35 +34,35 @@ public class Categorie implements Serializable {
         this.nom = nom;
     }
 
-    public SurCategorie getSurCategorie() {
-        return surCategorie;
+    public SurCategorieEntity getSurCategorieEntity() {
+        return surCategorieEntity;
     }
 
-    public void setSurCategorie(SurCategorie surCategorie) {
-        this.surCategorie = surCategorie;
+    public void setSurCategorieEntity(SurCategorieEntity surCategorieEntity) {
+        this.surCategorieEntity = surCategorieEntity;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Categorie categorie = (Categorie) o;
-        return Objects.equals(nom, categorie.nom) &&
-                Objects.equals(surCategorie, categorie.surCategorie);
+        CategorieEntity categorieEntity = (CategorieEntity) o;
+        return Objects.equals(nom, categorieEntity.nom) &&
+                Objects.equals(surCategorieEntity, categorieEntity.surCategorieEntity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(nom, surCategorie);
+        return Objects.hash(nom, surCategorieEntity);
 
     }
 
     @Override
     public String toString() {
-        return "Categorie{" +
+        return "CategorieEntity{" +
                 "id=" + id +
                 ", nom='" + nom + '\'' +
-                ", surCategorie=" + surCategorie +
+                ", surCategorieEntity=" + surCategorieEntity +
                 '}';
     }
 }

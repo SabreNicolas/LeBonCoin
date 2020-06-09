@@ -11,98 +11,98 @@ public class AnnonceTest {
         CategorieDao categorieManager = JpaDaoFactory.getDaoFactory(DaoFactory.PersistenceType.JPA).getCategorieDao();
         UserDao userManager = JpaDaoFactory.getDaoFactory(DaoFactory.PersistenceType.JPA).getUserDao();
 
-        Categorie categorie = categorieManager.find(Categorie.class,2);
-        System.out.println("-----categorie----");
-        System.out.println(categorie);
+        CategorieEntity categorieEntity = categorieManager.find(CategorieEntity.class,2);
+        System.out.println("-----categorieEntity----");
+        System.out.println(categorieEntity);
 
-        User user = userManager.find(User.class,3);
-        System.out.println("-----user----");
-        System.out.println(user);
+        UserEntity userEntity = userManager.find(UserEntity.class,3);
+        System.out.println("-----userEntity----");
+        System.out.println(userEntity);
 
         System.out.println("---------------");
-        System.out.println("----Annonce----");
+        System.out.println("----AnnonceEntity----");
         System.out.println("---------------");
-        for(Annonce t : annonceManager.findAll()) {
+        for(AnnonceEntity t : annonceManager.findAll()) {
             System.out.println(t);
         }
 
-        Annonce annonce = new Annonce();
-        annonce.setDescription("Description Test");
-        annonce.setStatut(true);
-        annonce.setCategorie(categorie);
-        annonce.setUtilisateur(user);
-        annonceManager.create(annonce);
+        AnnonceEntity annonceEntity = new AnnonceEntity();
+        annonceEntity.setDescription("Description Test");
+        annonceEntity.setStatut(true);
+        annonceEntity.setCategorieEntity(categorieEntity);
+        annonceEntity.setUtilisateur(userEntity);
+        annonceManager.create(annonceEntity);
 
         System.out.println("---------------");
-        System.out.println("---Annonce apres push---");
+        System.out.println("---AnnonceEntity apres push---");
         System.out.println("---------------");
-        for(Annonce t : annonceManager.findAll()) {
+        for(AnnonceEntity t : annonceManager.findAll()) {
             System.out.println(t);
         }
 
-        annonce.setDescription("Update Test");
-        annonce.setStatut(false);
-        annonceManager.update(annonce);
+        annonceEntity.setDescription("Update Test");
+        annonceEntity.setStatut(false);
+        annonceManager.update(annonceEntity);
 
         System.out.println("---------------");
-        System.out.println("---Annonce apres update---");
+        System.out.println("---AnnonceEntity apres update---");
         System.out.println("---------------");
-        for(Annonce t : annonceManager.findAll()) {
-            System.out.println(t);
-        }
-
-
-        annonceManager.delete(annonce);
-
-        System.out.println("---------------");
-        System.out.println("---Annonce apres delete---");
-        System.out.println("---------------");
-        for(Annonce t : annonceManager.findAll()) {
+        for(AnnonceEntity t : annonceManager.findAll()) {
             System.out.println(t);
         }
 
 
-        System.out.println("---------------");
-        System.out.println("---Annonce By Categorie---");
-        System.out.println("---------------");
-        for(Annonce t : annonceManager.findAnnonceByCategorie(4)) {
-            System.out.println(t);
-        }
+        annonceManager.delete(annonceEntity);
 
         System.out.println("---------------");
-        System.out.println("---Annonce By Categorie & active---");
+        System.out.println("---AnnonceEntity apres delete---");
         System.out.println("---------------");
-        for(Annonce t : annonceManager.findAnnonceByCategorieEtat(4,1)) {
-            System.out.println(t);
-        }
-
-        System.out.println("---------------");
-        System.out.println("---Annonce By Categorie & inactive---");
-        System.out.println("---------------");
-        for(Annonce t : annonceManager.findAnnonceByCategorieEtat(4,0)) {
-            System.out.println(t);
-        }
-
-        System.out.println("---------------");
-        System.out.println("---Annonce By User---");
-        System.out.println("---------------");
-        for(Annonce t : annonceManager.findAllAnnonceByUser(3)) {
+        for(AnnonceEntity t : annonceManager.findAll()) {
             System.out.println(t);
         }
 
 
         System.out.println("---------------");
-        System.out.println("---Annonce By User and active---");
+        System.out.println("---AnnonceEntity By CategorieEntity---");
         System.out.println("---------------");
-        for(Annonce t : annonceManager.findAllAnnonceByUserEtat(3,1)) {
+        for(AnnonceEntity t : annonceManager.findAnnonceByCategorie(4)) {
+            System.out.println(t);
+        }
+
+        System.out.println("---------------");
+        System.out.println("---AnnonceEntity By CategorieEntity & active---");
+        System.out.println("---------------");
+        for(AnnonceEntity t : annonceManager.findAnnonceByCategorieEtat(4,1)) {
+            System.out.println(t);
+        }
+
+        System.out.println("---------------");
+        System.out.println("---AnnonceEntity By CategorieEntity & inactive---");
+        System.out.println("---------------");
+        for(AnnonceEntity t : annonceManager.findAnnonceByCategorieEtat(4,0)) {
+            System.out.println(t);
+        }
+
+        System.out.println("---------------");
+        System.out.println("---AnnonceEntity By UserEntity---");
+        System.out.println("---------------");
+        for(AnnonceEntity t : annonceManager.findAllAnnonceByUser(3)) {
             System.out.println(t);
         }
 
 
         System.out.println("---------------");
-        System.out.println("---Annonce By User and inactive---");
+        System.out.println("---AnnonceEntity By UserEntity and active---");
         System.out.println("---------------");
-        for(Annonce t : annonceManager.findAllAnnonceByUserEtat(3,0)) {
+        for(AnnonceEntity t : annonceManager.findAllAnnonceByUserEtat(3,1)) {
+            System.out.println(t);
+        }
+
+
+        System.out.println("---------------");
+        System.out.println("---AnnonceEntity By UserEntity and inactive---");
+        System.out.println("---------------");
+        for(AnnonceEntity t : annonceManager.findAllAnnonceByUserEtat(3,0)) {
             System.out.println(t);
         }
 

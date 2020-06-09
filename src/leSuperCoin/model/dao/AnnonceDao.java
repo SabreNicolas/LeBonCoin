@@ -1,13 +1,13 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Annonce;
+import leSuperCoin.model.entities.AnnonceEntity;
 
 import java.util.Collection;
 
-public interface AnnonceDao extends Dao<Annonce> {
+public interface AnnonceDao extends Dao<AnnonceEntity> {
 
-    public Collection<Annonce> findAnnonceByCategorie(int i);
-    public Collection<Annonce> findAnnonceByCategorieEtat(int i,int j);
-    public Collection<Annonce> findAllAnnonceByUser(int i);
-    public Collection<Annonce> findAllAnnonceByUserEtat(int i, int j);
+    public Collection<AnnonceEntity> findAnnonceByCategorie(int i);
+    public Collection<AnnonceEntity> findAnnonceByCategorieEtat(int i, int j);
+    public Collection<AnnonceEntity> findAllAnnonceByUser(int i);
+    public Collection<AnnonceEntity> findAllAnnonceByUserEtat(int i, int j);
 }

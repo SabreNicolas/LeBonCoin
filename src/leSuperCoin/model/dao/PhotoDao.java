@@ -1,10 +1,10 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Photo;
+import leSuperCoin.model.entities.PhotoEntity;
 
 import java.util.Collection;
 
-public interface PhotoDao extends Dao<Photo> {
+public interface PhotoDao extends Dao<PhotoEntity> {
 
-    public Collection<Photo> findAllPhotoByAnnonce(int i);
+    public Collection<PhotoEntity> findAllPhotoByAnnonce(int i);
 }

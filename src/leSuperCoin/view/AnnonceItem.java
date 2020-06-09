@@ -1,14 +1,37 @@
 package leSuperCoin.view;
 
+import leSuperCoin.controller.Controller;
+import leSuperCoin.model.entities.AnnonceEntity;
+import leSuperCoin.model.entities.ValeurCritereEntity;
 import leSuperCoin.resources.Globals;
 import leSuperCoin.resources.Globals.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class AnnonceItem extends JPanel {
+    Controller controller;
+    AnnonceEntity annonceEntity;
 
-    public AnnonceItem() {
+    public AnnonceItem(Controller controller, AnnonceEntity annonceEntity) {
+        this.controller = controller;
+        this.annonceEntity = annonceEntity;
+
+
+        String titreStr = "???";
+        String prixStr = "???";
+        for (ValeurCritereEntity valeurCritereEntity : this.controller.getModel().getValeurCriteresOf(annonceEntity)) {
+            switch (valeurCritereEntity.getCritereEntity().getNomCritere()) {
+                case "Titre":
+                    titreStr = valeurCritereEntity.getValeur();
+                    break;
+                case "Prix":
+                    prixStr = valeurCritereEntity.getValeur();
+                    break;
+            }
+        }
 
         // A faire : créer une fonction pour les modifications de grid pour éviter la duplication de code.
 
@@ -16,6 +39,33 @@ public class AnnonceItem extends JPanel {
         this.setLayout(new GridBagLayout());
         GridBagConstraints grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.BASELINE;
+
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                controller.getView().navigate(View.Target.ANNONCE, annonceEntity);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         // Zone pour Image
         grid.gridx = 0;
@@ -30,7 +80,8 @@ public class AnnonceItem extends JPanel {
         grid.fill = GridBagConstraints.BASELINE;
 
         JLabel titre = new JLabel();
-        titre.setText("Titre de l'annonce");
+        // Todo: titre
+        titre.setText(titreStr);
         titre.setFont(new Font(titre.getFont().getName(), Font.PLAIN, 30));
         titre.setForeground(Colors.BLEU);
         grid.gridx = 1;
@@ -49,7 +100,7 @@ public class AnnonceItem extends JPanel {
         this.add(new JLabel(), grid);
 
         JTextArea description = new JTextArea();
-        description.setText("Lorem ipsum dolor sit amet, consectetur adipiscing elit. In quis dui felis. Nullam commodo ullamcorper maximus. Praesent tincidunt vestibulum malesuada. Phasellus ultrices ligula vitae orci ultrices iaculis nec nec sapien. Nunc dapibus lobortis arcu, in luctus neque. Aenean at pulvinar turpis. Fusce ac orci lectus. Aenean eleifend auctor velit sit amet consequat. Nullam a nibh et felis posuere tincidunt. Suspendisse vel porttitor lectus, et sollicitudin eros. Quisque non augue ac ante placerat consequat.");
+        description.setText(annonceEntity.getDescription());
         description.setFont(new Font(description.getFont().getName(), Font.PLAIN, 15));
         description.setForeground(Colors.NOIR);
         description.setBackground(Colors.GRIS_CLAIR);
@@ -66,7 +117,8 @@ public class AnnonceItem extends JPanel {
         grid.fill = GridBagConstraints.BASELINE;
 
         JLabel prix = new JLabel();
-        prix.setText("100€");
+        // Todo: prix
+        prix.setText(prixStr + " €");
         prix.setFont(new Font(titre.getFont().getName(), Font.PLAIN, 30));
         prix.setForeground(Colors.BLEU);
         grid.gridx = 3;

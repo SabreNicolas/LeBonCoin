@@ -1,13 +1,12 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Photo;
-import leSuperCoin.model.entities.SurCategorie;
+import leSuperCoin.model.entities.SurCategorieEntity;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.Collection;
 
-public class JpaDaoSurCategorie extends JpaDao<SurCategorie> implements SurCategorieDao {
+public class JpaDaoSurCategorie extends JpaDao<SurCategorieEntity> implements SurCategorieDao {
 
     private static JpaDaoSurCategorie instance;
 
@@ -22,27 +21,27 @@ public class JpaDaoSurCategorie extends JpaDao<SurCategorie> implements SurCateg
     }
 
     @Override
-    public SurCategorie find(Class c, Integer id) {
-        return super.find(SurCategorie.class, id);
+    public SurCategorieEntity find(Class c, Integer id) {
+        return super.find(SurCategorieEntity.class, id);
     }
 
     @Override
-    public Collection<SurCategorie> findAll() {
-        Query query = session.createQuery("SELECT a FROM SurCategorie a");
-        return (Collection<SurCategorie>) query.getResultList();
+    public Collection<SurCategorieEntity> findAll() {
+        Query query = session.createQuery("SELECT a FROM SurCategorieEntity a");
+        return (Collection<SurCategorieEntity>) query.getResultList();
     }
 
     @Override
     public boolean deleteAll() {
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM SurCategorie a");
+        Query query = session.createQuery("DELETE FROM SurCategorieEntity a");
         query.executeUpdate();
         tx.commit();
         return true;
     }
 
     @Override
-    public boolean delete(SurCategorie obj) {
+    public boolean delete(SurCategorieEntity obj) {
         return super.delete(obj);
     }
 }
