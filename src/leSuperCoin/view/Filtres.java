@@ -31,6 +31,13 @@ public class Filtres extends JPanel {
         }
         {
             JComboBox jComboBox = new JComboBox<>(listeCategorie.toArray(new String[listeCategorie.size()]));
+            if (controller.getSurCategorieEntity() != null) {
+                for (int i = 0; i < jComboBox.getItemCount(); ++i) {
+                    if (jComboBox.getItemAt(i) == controller.getSurCategorieEntity().getNom()) {
+                        jComboBox.setSelectedIndex(i);
+                    }
+                }
+            }
             jComboBox.addActionListener(e -> {
                 for (SurCategorieEntity surCategorie : surCategories) {
                     if (surCategorie.getNom() == jComboBox.getSelectedItem()) {
@@ -51,6 +58,13 @@ public class Filtres extends JPanel {
             }
             {
                 JComboBox jComboBox = new JComboBox<>(listeSousCategorie.toArray(new String[listeSousCategorie.size()]));
+                if (controller.getCategorieEntity() != null) {
+                    for (int i = 0; i < jComboBox.getItemCount(); ++i) {
+                        if (jComboBox.getItemAt(i) == controller.getCategorieEntity().getNom()) {
+                            jComboBox.setSelectedIndex(i);
+                        }
+                    }
+                }
                 jComboBox.addActionListener(e -> {
                     for (CategorieEntity categorie : categories) {
                         if (categorie.getNom() == jComboBox.getSelectedItem()) {
@@ -82,8 +96,12 @@ public class Filtres extends JPanel {
         }
 
 
-        this.setVisible(true);
+        this.
 
-        this.validate();
+                setVisible(true);
+
+        this.
+
+                validate();
     }
 }
