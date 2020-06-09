@@ -44,4 +44,10 @@ public class JpaDaoUser extends JpaDao<UserEntity> implements UserDao {
     public boolean delete(UserEntity obj) {
         return super.delete(obj);
     }
+
+
+    public UserEntity findUserByLoginAndPasse(String login , String passe) {
+        Query query = session.createQuery("SELECT u FROM UserEntity u WHERE u.login="+login+" AND u.motDePasse="+passe);
+        return (UserEntity) query.getSingleResult();
+    }
 }
