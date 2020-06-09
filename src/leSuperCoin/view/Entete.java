@@ -5,6 +5,8 @@ import leSuperCoin.resources.Globals.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class Entete extends JPanel {
 
@@ -17,6 +19,33 @@ public class Entete extends JPanel {
         nomAppli.setForeground(Colors.BLANC);
         nomAppli.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 25));
         this.add(nomAppli, BorderLayout.WEST);
+
+        nomAppli.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                controller.getView().navigate(View.Target.ACCUEIL);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
 
         JPanel boutons = new JPanel();
         boutons.setLayout(new BorderLayout());
