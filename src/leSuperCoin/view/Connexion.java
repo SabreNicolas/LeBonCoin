@@ -6,6 +6,8 @@ import leSuperCoin.resources.Globals;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -24,6 +26,7 @@ public class Connexion extends JPanel {
         this.setLayout(new GridBagLayout());
         this.grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.BOTH;
+
         // Afficher champ pseudo / mot de passe
         // Afficher un btn "ou s'inscrire" qui appelle this.form.getController().getView().navigate(View.Target.INSCRIPTION);
 
@@ -40,6 +43,7 @@ public class Connexion extends JPanel {
 
         this.setVisible(true);
     }
+
     public void addConnectionForm() {
         this.connectionForm = new JPanel();
         this.connectionForm.setLayout(new GridBagLayout());
@@ -50,6 +54,8 @@ public class Connexion extends JPanel {
         this.grid.gridy = 1;
         this.grid.weighty = 10;
         this.add(this.connectionForm, this.grid);
+
+        JButton connexion = new JButton(Globals.Constants.SE_CONNECTER);
 
         JLabel labelInputId = new JLabel();
         labelInputId.setText(Globals.Constants.IDENTIFIANT);
@@ -64,6 +70,23 @@ public class Connexion extends JPanel {
         inputId.setBorder(BorderFactory.createLineBorder(Globals.Colors.NOIR, 1));
         connectionFormGrid.gridx = 1;
         connectionFormGrid.gridy = 0;
+        inputId.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                form.setPseudo(inputId.getText());
+                connexion.setEnabled(form.isReady());
+            }
+        });
         connectionForm.add(inputId, connectionFormGrid);
 
         JLabel labelInputPwd = new JLabel();
@@ -79,18 +102,33 @@ public class Connexion extends JPanel {
         inputPwd.setBorder(BorderFactory.createLineBorder(Globals.Colors.NOIR, 1));
         connectionFormGrid.gridx = 1;
         connectionFormGrid.gridy = 1;
+        inputPwd.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                form.setMotDePasse(inputPwd.getText());
+                connexion.setEnabled(form.isReady());
+            }
+        });
         connectionForm.add(inputPwd, connectionFormGrid);
 
-        JButton connexion = new JButton(Globals.Constants.SE_CONNECTER);
         connexion.setBorder(BorderFactory.createEmptyBorder());
         connexion.setBorder(BorderFactory.createLineBorder(Globals.Colors.BLEU, 5));
         connexion.setBackground(Globals.Colors.BLEU);
         connexion.setForeground(Globals.Colors.BLANC);
+        connexion.setEnabled(false);
         connectionFormGrid.gridx = 0;
         connectionFormGrid.gridy = 2;
         connectionFormGrid.gridwidth = 2;
-        connectionForm.add(connexion, connectionFormGrid);
-
         connexion.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -104,7 +142,7 @@ public class Connexion extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                form.getController().getView().navigate(View.Target.MON_COMPTE);
+                form.submit();
             }
 
             @Override
@@ -117,6 +155,7 @@ public class Connexion extends JPanel {
 
             }
         });
+        connectionForm.add(connexion, connectionFormGrid);
 
         JButton creerCompte = new JButton(Globals.Constants.CREER_COMPTE);
         creerCompte.setBorder(BorderFactory.createEmptyBorder());

@@ -6,6 +6,8 @@ import leSuperCoin.resources.Globals;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -44,6 +46,7 @@ public class Inscription extends JPanel {
 
         this.setVisible(true);
     }
+
     public void addInscriptionForm() {
         this.inscrptionForm = new JPanel();
         this.inscrptionForm.setLayout(new GridBagLayout());
@@ -54,6 +57,8 @@ public class Inscription extends JPanel {
         this.grid.gridy = 1;
         this.grid.weighty = 10;
         this.add(this.inscrptionForm, this.grid);
+
+        JButton connexion = new JButton(Globals.Constants.CREER_COMPTE);
 
         JLabel labelInputNom = new JLabel();
         labelInputNom.setText(Globals.Constants.NOM);
@@ -68,6 +73,23 @@ public class Inscription extends JPanel {
         inputNom.setBorder(BorderFactory.createLineBorder(Globals.Colors.NOIR, 1));
         inscriptionFormGrid.gridx = 1;
         inscriptionFormGrid.gridy = 0;
+        inputNom.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                form.setNom(inputNom.getText());
+                connexion.setEnabled(form.isReady());
+            }
+        });
         inscrptionForm.add(inputNom, inscriptionFormGrid);
 
         JLabel labelPrenom = new JLabel();
@@ -83,6 +105,23 @@ public class Inscription extends JPanel {
         inputPrenom.setBorder(BorderFactory.createLineBorder(Globals.Colors.NOIR, 1));
         inscriptionFormGrid.gridx = 1;
         inscriptionFormGrid.gridy = 1;
+        inputPrenom.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                form.setPrenom(inputPrenom.getText());
+                connexion.setEnabled(form.isReady());
+            }
+        });
         inscrptionForm.add(inputPrenom, inscriptionFormGrid);
 
         JLabel labelPseudo = new JLabel();
@@ -98,6 +137,23 @@ public class Inscription extends JPanel {
         inputPseudo.setBorder(BorderFactory.createLineBorder(Globals.Colors.NOIR, 1));
         inscriptionFormGrid.gridx = 1;
         inscriptionFormGrid.gridy = 2;
+        inputPseudo.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                form.setPseudo(inputPseudo.getText());
+                connexion.setEnabled(form.isReady());
+            }
+        });
         inscrptionForm.add(inputPseudo, inscriptionFormGrid);
 
         JLabel labelMail = new JLabel();
@@ -113,6 +169,23 @@ public class Inscription extends JPanel {
         inputMail.setBorder(BorderFactory.createLineBorder(Globals.Colors.NOIR, 1));
         inscriptionFormGrid.gridx = 1;
         inscriptionFormGrid.gridy = 3;
+        inputMail.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                form.setMail(inputMail.getText());
+                connexion.setEnabled(form.isReady());
+            }
+        });
         inscrptionForm.add(inputMail, inscriptionFormGrid);
 
         JLabel labelInputPwd = new JLabel();
@@ -128,18 +201,33 @@ public class Inscription extends JPanel {
         inputPwd.setBorder(BorderFactory.createLineBorder(Globals.Colors.NOIR, 1));
         inscriptionFormGrid.gridx = 1;
         inscriptionFormGrid.gridy = 4;
+        inputPwd.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                form.setMotDePasse(inputPwd.getText());
+                connexion.setEnabled(form.isReady());
+            }
+        });
         inscrptionForm.add(inputPwd, inscriptionFormGrid);
 
-        JButton connexion = new JButton(Globals.Constants.CREER_COMPTE);
         connexion.setBorder(BorderFactory.createEmptyBorder());
         connexion.setBorder(BorderFactory.createLineBorder(Globals.Colors.BLEU, 5));
         connexion.setBackground(Globals.Colors.BLEU);
         connexion.setForeground(Globals.Colors.BLANC);
+        connexion.setEnabled(false);
         inscriptionFormGrid.gridx = 0;
         inscriptionFormGrid.gridy = 5;
         inscriptionFormGrid.gridwidth = 2;
-        inscrptionForm.add(connexion, inscriptionFormGrid);
-
         connexion.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -153,7 +241,7 @@ public class Inscription extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
-                form.getController().getView().navigate(View.Target.MON_COMPTE);
+                form.submit();
             }
 
             @Override
@@ -166,6 +254,7 @@ public class Inscription extends JPanel {
 
             }
         });
+        inscrptionForm.add(connexion, inscriptionFormGrid);
     }
 
     private void addEntete() {

@@ -23,16 +23,13 @@ public class MonCompte extends JPanel {
         this.setLayout(new GridBagLayout());
         this.grid = new GridBagConstraints();
         grid.fill = GridBagConstraints.BOTH;
-        
-        // Afficher un btn déconnexion qui appelle
-        //  - this.form.getController().getModel().disconnect();
-        //  - this.form.getController().getView().navigate(View.Target.ACCUEIL);
 
         this.addEntete();
         this.addDeconnexion();
-        
+
         this.setVisible(true);
     }
+
     public void addDeconnexion() {
         this.deconnexionForm = new JPanel();
         this.deconnexionForm.setLayout(new GridBagLayout());
@@ -67,6 +64,7 @@ public class MonCompte extends JPanel {
 
             @Override
             public void mouseReleased(MouseEvent e) {
+                controller.getModel().disconnect();
                 controller.getView().navigate(View.Target.ACCUEIL);
             }
 
