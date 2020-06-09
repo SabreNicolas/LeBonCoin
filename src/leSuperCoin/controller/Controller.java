@@ -13,10 +13,11 @@ public class Controller {
         this.view = new View(this);
     }
 
-    public Model getModel(){
+    public Model getModel() {
         return this.model;
     }
-    public View getView(){
+
+    public View getView() {
         return this.view;
     }
 }

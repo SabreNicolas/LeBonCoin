@@ -10,22 +10,31 @@ public class Globals {
         public static final Color GRIS_CLAIR = new Color(229, 229, 229);
         public static final Color BLANC = new Color(255, 255, 255);
         public static final Color BLEU = new Color(29, 129, 197);
+        public static final Color BLEU_FONCE = new Color(8, 38, 58);
     }
 
     public static class Constants {
         public static final String NOM_APPLI = "Le Super Coin";
         public static final String DEPOT_ANNONCE_BTN = "Déposer une annonce";
         public static final String MON_COMPTE_BTN = "Mon compte";
+        public static final String SE_CONNECTER_BTN = "Se connecter";
         public static final String LANCER_RECHERCHE = "Lancer la recherche";
-        public static final String CHAMPS_RECHERCHE = "Que cherchez-vous ?";
         public static final String TITRE_DEPOT_ANNONCE = "Déposer une annonce";
         public static final String ETAPE_SUIVANTE = "Étape suivante >";
         public static final String ETAPE_CATEGORIE = "Choisir une catégorie";
         public static final String ETAPE_SOUS_CATEGORIE = "Choisir une sous-catégorie";
         public static final String ETAPE_DESCRIPTION = "Description";
         public static final String ETAPE_CRITERES = "Détails";
-        public static final String ANNONCE_TITRE = "Titre de l'annonce";
         public static final String ANNONCE_DESCRIPTION = "Description de l'annonce";
+        public static final String SE_CONNECTER = "Se connecter";
+        public static final String SE_DECONNECTER = "Se déconnecter";
+        public static final String CREER_COMPTE = "Créer un compte";
+        public static final String IDENTIFIANT = "Identifiant";
+        public static final String MOT_DE_PASSE = "Mot de passe";
+        public static final String NOM = "Nom";
+        public static final String PRENOM = "Prénom";
+        public static final String MAIL = "Mail";
+        public static final String PSEUDO = "Pseudo";
     }
 
     public static class  Images {

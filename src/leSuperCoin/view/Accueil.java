@@ -8,7 +8,6 @@ import leSuperCoin.resources.Globals.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collection;
 
 public class Accueil extends JPanel {
     private Controller controller;

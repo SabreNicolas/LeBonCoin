@@ -5,8 +5,10 @@ import leSuperCoin.resources.Globals.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class Entete extends JPanel{
+public class Entete extends JPanel {
 
     public Entete(Controller controller) {
 
@@ -18,31 +20,66 @@ public class Entete extends JPanel{
         nomAppli.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 25));
         this.add(nomAppli, BorderLayout.WEST);
 
+        nomAppli.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                controller.getView().navigate(View.Target.ACCUEIL);
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
+            }
+        });
+
         JPanel boutons = new JPanel();
         boutons.setLayout(new BorderLayout());
         boutons.setBorder(BorderFactory.createLineBorder(Colors.BLEU, 25));
         this.add(boutons, BorderLayout.EAST);
 
-        JButton depotAnnonce = new JButton();
-        depotAnnonce.setText(Constants.DEPOT_ANNONCE_BTN);
-        // Ajouter l'icone "plus.png"
-        depotAnnonce.setBorderPainted(false);
-        depotAnnonce.setBackground(Colors.BLEU);
-        depotAnnonce.setForeground(Colors.NOIR);
-        depotAnnonce.addActionListener(e -> {
-            depotAnnonce.setBackground(Colors.NOIR);
-            controller.getView().navigate(View.Target.DEPOT_ANNONCE);
-        });
-        boutons.add(depotAnnonce, BorderLayout.WEST);
+        if (controller.getModel().isConnected()) {
+            JButton depotAnnonce = new JButton();
+            depotAnnonce.setText(Constants.DEPOT_ANNONCE_BTN);
+            // Ajouter l'icone "plus.png"
+            depotAnnonce.setBorderPainted(false);
+            depotAnnonce.setBackground(Colors.BLEU);
+            depotAnnonce.setForeground(Colors.NOIR);
+            depotAnnonce.addActionListener(e -> {
+                depotAnnonce.setBackground(Colors.NOIR);
+                controller.getView().navigate(View.Target.DEPOT_ANNONCE);
+            });
+            boutons.add(depotAnnonce, BorderLayout.WEST);
+        }
 
         JButton monCompte = new JButton();
-        monCompte.setText(Constants.MON_COMPTE_BTN);
+        monCompte.setText(controller.getModel().isConnected() ? Constants.MON_COMPTE_BTN : Constants.SE_CONNECTER_BTN);
         // Remplacer le texte par l'icone "utilisateur.png"
         monCompte.setBorderPainted(false);
         monCompte.setBackground(Colors.BLEU);
         monCompte.setForeground(Colors.BLANC);
         boutons.add(monCompte, BorderLayout.EAST);
-
+        monCompte.addActionListener(e -> {
+            if (controller.getModel().isConnected()) {
+                controller.getView().navigate(View.Target.MON_COMPTE);
+            } else {
+                controller.getView().navigate(View.Target.CONNEXION);
+            }
+        });
         boutons.setVisible(true);
 
         this.setVisible(true);
