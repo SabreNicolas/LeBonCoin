@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table( name = "critere",schema = "lesupercoin")
-public class Critere implements Serializable {
+public class CritereEntity implements Serializable {
 
     @Id
     @Column(name = "idCritere")
@@ -16,7 +16,7 @@ public class Critere implements Serializable {
 
     @ManyToOne
     @JoinColumn(name="idSurCategorie", referencedColumnName = "idSurCategorie")
-    private SurCategorie surCategorie;
+    private SurCategorieEntity surCategorieEntity;
 
     @Column(name="nomCritere")
     private String nomCritere;
@@ -24,7 +24,7 @@ public class Critere implements Serializable {
     @Column(name="type")
     private String type;
 
-    public Critere() {
+    public CritereEntity() {
     }
 
     public int getId() {
@@ -32,12 +32,12 @@ public class Critere implements Serializable {
     }
 
 
-    public SurCategorie getSurCategorie() {
-        return surCategorie;
+    public SurCategorieEntity getSurCategorieEntity() {
+        return surCategorieEntity;
     }
 
-    public void setSurCategorie(SurCategorie surCategorie) {
-        this.surCategorie = surCategorie;
+    public void setSurCategorieEntity(SurCategorieEntity surCategorieEntity) {
+        this.surCategorieEntity = surCategorieEntity;
     }
 
     public String getNomCritere() {
@@ -60,22 +60,22 @@ public class Critere implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Critere critere = (Critere) o;
-        return Objects.equals(surCategorie, critere.surCategorie) &&
-                Objects.equals(nomCritere, critere.nomCritere) &&
-                Objects.equals(type, critere.type);
+        CritereEntity critereEntity = (CritereEntity) o;
+        return Objects.equals(surCategorieEntity, critereEntity.surCategorieEntity) &&
+                Objects.equals(nomCritere, critereEntity.nomCritere) &&
+                Objects.equals(type, critereEntity.type);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(surCategorie, nomCritere, type);
+        return Objects.hash(surCategorieEntity, nomCritere, type);
     }
 
     @Override
     public String toString() {
-        return "Critere{" +
+        return "CritereEntity{" +
                 "id=" + id +
-                ", categorie=" + surCategorie +
+                ", categorie=" + surCategorieEntity +
                 ", nomCritere='" + nomCritere + '\'' +
                 ", type='" + type + '\'' +
                 '}';

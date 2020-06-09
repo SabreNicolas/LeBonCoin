@@ -1,10 +1,10 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Categorie;
+import leSuperCoin.model.entities.CategorieEntity;
 
 import java.util.Collection;
 
-public interface CategorieDao extends Dao<Categorie> {
+public interface CategorieDao extends Dao<CategorieEntity> {
 
-    public Collection<Categorie> findAllCategorieBySurCategorie(int i);
+    public Collection<CategorieEntity> findAllCategorieBySurCategorie(int i);
 }

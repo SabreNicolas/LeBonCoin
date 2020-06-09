@@ -11,9 +11,9 @@ public class CritereTest {
         CritereDao critereManager = JpaDaoFactory.getDaoFactory(DaoFactory.PersistenceType.JPA).getCritereDao();
 
         System.out.println("---------------");
-        System.out.println("-Critere by surcat id or no surcatId-");
+        System.out.println("-CritereEntity by surcat id or no surcatId-");
         System.out.println("---------------");
-        for(Critere c : critereManager.findCritereByIdSurCategorieAndNoSurCategorie(4)) {
+        for(CritereEntity c : critereManager.findCritereByIdSurCategorieAndNoSurCategorie(4)) {
             System.out.println(c);
         }
 

@@ -1,14 +1,12 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Annonce;
-import leSuperCoin.model.entities.Categorie;
-import leSuperCoin.model.entities.Critere;
+import leSuperCoin.model.entities.CritereEntity;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.Collection;
 
-public class JpaDaoCritere extends JpaDao<Critere> implements CritereDao {
+public class JpaDaoCritere extends JpaDao<CritereEntity> implements CritereDao {
 
     private static JpaDaoCritere instance;
 
@@ -23,33 +21,33 @@ public class JpaDaoCritere extends JpaDao<Critere> implements CritereDao {
     }
 
     @Override
-    public Critere find(Class c, Integer id) {
-        return super.find(Critere.class, id);
+    public CritereEntity find(Class c, Integer id) {
+        return super.find(CritereEntity.class, id);
     }
 
     @Override
-    public Collection<Critere> findAll() {
-        Query query = session.createQuery("SELECT a FROM Critere a");
-        return (Collection<Critere>) query.getResultList();
+    public Collection<CritereEntity> findAll() {
+        Query query = session.createQuery("SELECT a FROM CritereEntity a");
+        return (Collection<CritereEntity>) query.getResultList();
     }
 
     @Override
     public boolean deleteAll() {
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM Critere a");
+        Query query = session.createQuery("DELETE FROM CritereEntity a");
         query.executeUpdate();
         tx.commit();
         return true;
     }
 
     @Override
-    public boolean delete(Critere obj) {
+    public boolean delete(CritereEntity obj) {
         return super.delete(obj);
     }
 
 
-    public Collection<Critere> findCritereByIdSurCategorieAndNoSurCategorie(int i) {
-        Query query = session.createQuery("SELECT c FROM Critere c WHERE c.surCategorie="+i+" OR c.surCategorie=null");
-        return (Collection<Critere>) query.getResultList();
+    public Collection<CritereEntity> findCritereByIdSurCategorieAndNoSurCategorie(int i) {
+        Query query = session.createQuery("SELECT c FROM CritereEntity c WHERE c.surCategorieEntity="+i+" OR c.surCategorieEntity=null");
+        return (Collection<CritereEntity>) query.getResultList();
     }
 }

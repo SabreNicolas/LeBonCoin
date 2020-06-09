@@ -13,11 +13,11 @@ public abstract class DaoFactory {
             case JPA:
                 return new JpaDaoFactory();
             case JDBC:
-                throw new UnsupportedOperationException("Not implemented yet.");
+                throw new UnsupportedOperationException("JDBC DAO not implemented yet.");
             case XML:
-                throw new UnsupportedOperationException("Not implemented yet.");
+                throw new UnsupportedOperationException("XML DAO not implemented yet.");
             default:
-                return null;
+                throw new UnsupportedOperationException("Unspecified DAO not implemented yet.");
         }
     }
 

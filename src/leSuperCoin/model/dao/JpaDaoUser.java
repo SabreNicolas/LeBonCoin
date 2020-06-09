@@ -8,7 +8,7 @@ import org.hibernate.query.Query;
 
 import java.util.Collection;
 
-public class JpaDaoUser extends JpaDao<User> implements UserDao {
+public class JpaDaoUser extends JpaDao<UserEntity> implements UserDao {
 
     private static JpaDaoUser instance;
 
@@ -23,27 +23,27 @@ public class JpaDaoUser extends JpaDao<User> implements UserDao {
     }
 
     @Override
-    public User find(Class c, Integer id) {
-        return super.find(User.class, id);
+    public UserEntity find(Class c, Integer id) {
+        return super.find(UserEntity.class, id);
     }
 
     @Override
-    public Collection<User> findAll() {
-        Query query = session.createQuery("SELECT a FROM User a");
-        return (Collection<User>) query.getResultList();
+    public Collection<UserEntity> findAll() {
+        Query query = session.createQuery("SELECT a FROM UserEntity a");
+        return (Collection<UserEntity>) query.getResultList();
     }
 
     @Override
     public boolean deleteAll() {
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM User a");
+        Query query = session.createQuery("DELETE FROM UserEntity a");
         query.executeUpdate();
         tx.commit();
         return true;
     }
 
     @Override
-    public boolean delete(User obj) {
+    public boolean delete(UserEntity obj) {
         return super.delete(obj);
     }
 

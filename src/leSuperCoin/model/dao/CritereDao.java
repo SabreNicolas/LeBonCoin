@@ -1,10 +1,10 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Critere;
+import leSuperCoin.model.entities.CritereEntity;
 
 import java.util.Collection;
 
-public interface CritereDao extends Dao<Critere>{
+public interface CritereDao extends Dao<CritereEntity>{
 
-    public Collection<Critere> findCritereByIdSurCategorieAndNoSurCategorie(int i);
+    public Collection<CritereEntity> findCritereByIdSurCategorieAndNoSurCategorie(int i);
 }

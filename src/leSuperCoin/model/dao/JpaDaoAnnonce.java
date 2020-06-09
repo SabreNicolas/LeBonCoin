@@ -1,13 +1,12 @@
 package leSuperCoin.model.dao;
 
-import leSuperCoin.model.entities.Annonce;
-import leSuperCoin.model.entities.Critere;
+import leSuperCoin.model.entities.AnnonceEntity;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import java.util.Collection;
 
-public class JpaDaoAnnonce extends JpaDao<Annonce> implements AnnonceDao {
+public class JpaDaoAnnonce extends JpaDao<AnnonceEntity> implements AnnonceDao {
 
     private static JpaDaoAnnonce instance;
 
@@ -22,49 +21,49 @@ public class JpaDaoAnnonce extends JpaDao<Annonce> implements AnnonceDao {
     }
 
     @Override
-    public Annonce find(Class c, Integer id) {
-        return super.find(Annonce.class, id);
+    public AnnonceEntity find(Class c, Integer id) {
+        return super.find(AnnonceEntity.class, id);
     }
 
     @Override
-    public Collection<Annonce> findAll() {
-        Query query = session.createQuery("SELECT a FROM Annonce a");
-        return (Collection<Annonce>) query.getResultList();
+    public Collection<AnnonceEntity> findAll() {
+        Query query = session.createQuery("SELECT a FROM AnnonceEntity a");
+        return (Collection<AnnonceEntity>) query.getResultList();
     }
 
     @Override
     public boolean deleteAll() {
         Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("DELETE FROM Annonce a");
+        Query query = session.createQuery("DELETE FROM AnnonceEntity a");
         query.executeUpdate();
         tx.commit();
         return true;
     }
 
     @Override
-    public boolean delete(Annonce obj) {
+    public boolean delete(AnnonceEntity obj) {
         return super.delete(obj);
     }
 
-    public Collection<Annonce> findAnnonceByCategorie(int i) {
-        Query query = session.createQuery("SELECT a FROM Annonce a WHERE a.categorie="+i);
-        return (Collection<Annonce>) query.getResultList();
+    public Collection<AnnonceEntity> findAnnonceByCategorie(int i) {
+        Query query = session.createQuery("SELECT a FROM AnnonceEntity a WHERE a.categorieEntity="+i);
+        return (Collection<AnnonceEntity>) query.getResultList();
     }
 
-    public Collection<Annonce> findAnnonceByCategorieEtat(int i,int j) {
-        Query query = session.createQuery("SELECT a FROM Annonce a WHERE a.categorie="+i+"AND a.statut="+j);
-        return (Collection<Annonce>) query.getResultList();
+    public Collection<AnnonceEntity> findAnnonceByCategorieEtat(int i, int j) {
+        Query query = session.createQuery("SELECT a FROM AnnonceEntity a WHERE a.categorie="+i+"AND a.statut="+j);
+        return (Collection<AnnonceEntity>) query.getResultList();
     }
 
-    public Collection<Annonce> findAllAnnonceByUser(int i) {
-        Query query = session.createQuery("SELECT a FROM Annonce a WHERE a.utilisateur="+i);
-        return (Collection<Annonce>) query.getResultList();
+    public Collection<AnnonceEntity> findAllAnnonceByUser(int i) {
+        Query query = session.createQuery("SELECT a FROM AnnonceEntity a WHERE a.utilisateur="+i);
+        return (Collection<AnnonceEntity>) query.getResultList();
     }
 
     // 1 = annonce active et 0 annonce inactive
-    public Collection<Annonce> findAllAnnonceByUserEtat(int i, int j) {
-        Query query = session.createQuery("SELECT a FROM Annonce a WHERE a.utilisateur="+i+"AND a.statut="+j);
-        return (Collection<Annonce>) query.getResultList();
+    public Collection<AnnonceEntity> findAllAnnonceByUserEtat(int i, int j) {
+        Query query = session.createQuery("SELECT a FROM AnnonceEntity a WHERE a.utilisateur="+i+"AND a.statut="+j);
+        return (Collection<AnnonceEntity>) query.getResultList();
     }
 
 }
