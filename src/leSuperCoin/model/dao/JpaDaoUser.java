@@ -1,5 +1,6 @@
 package leSuperCoin.model.dao;
 
+import leSuperCoin.model.entities.Critere;
 import leSuperCoin.model.entities.SurCategorie;
 import leSuperCoin.model.entities.User;
 import org.hibernate.Transaction;
@@ -44,5 +45,11 @@ public class JpaDaoUser extends JpaDao<User> implements UserDao {
     @Override
     public boolean delete(User obj) {
         return super.delete(obj);
+    }
+
+
+    public User findUserByLoginAndPasse(String login , String passe) {
+        Query query = session.createQuery("SELECT u FROM User u WHERE u.login="+login+" AND u.motDePasse="+passe);
+        return (User) query.getSingleResult();
     }
 }
