@@ -30,7 +30,7 @@ public class DepotAnnonceController {
         annonceEntity.setDescription(this.description);
         annonceEntity.setStatut(true);
         annonceEntity.setCategorieEntity(this.categorie);
-        annonceEntity.setUtilisateur(this.controller.getModel().getDefaultUser());
+        annonceEntity.setUtilisateur(this.controller.getModel().getCurrentUser());
         this.controller.getModel().addAnnonce(annonceEntity);
 
         for( Map.Entry<CritereEntity, String> entry: critereMap.entrySet()){

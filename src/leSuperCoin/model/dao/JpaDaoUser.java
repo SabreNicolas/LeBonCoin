@@ -15,7 +15,7 @@ public class JpaDaoUser extends JpaDao<UserEntity> implements UserDao {
     }
 
     public static JpaDaoUser getInstance() {
-        if(instance == null)
+        if (instance == null)
             instance = new JpaDaoUser();
         return instance;
     }
@@ -46,8 +46,8 @@ public class JpaDaoUser extends JpaDao<UserEntity> implements UserDao {
     }
 
 
-    public UserEntity findUserByLoginAndPasse(String login , String passe) {
-        Query query = session.createQuery("SELECT u FROM UserEntity u WHERE u.login="+login+" AND u.motDePasse="+passe);
+    public UserEntity findUserByLoginAndPasse(String login, String passe) {
+        Query query = session.createQuery("SELECT u FROM UserEntity u WHERE u.login='" + login + "' AND u.motDePasse='" + passe + "'");
         return (UserEntity) query.getSingleResult();
     }
 }

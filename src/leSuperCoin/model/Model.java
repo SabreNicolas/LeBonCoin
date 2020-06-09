@@ -51,6 +51,8 @@ public class Model {
     private UserDao userManager;
     private ValeurCritereDao valeurCritereManager;
 
+    private UserEntity currentUser;
+
     public Model() {
         DaoFactory daoFactory = JpaDaoFactory.getDaoFactory(DaoFactory.PersistenceType.JPA);
 
@@ -63,13 +65,32 @@ public class Model {
         this.valeurCritereManager = daoFactory.getValeurCritereDao();
     }
 
-    // Placeholders
+    // Meta
 
-    public UserEntity getDefaultUser() {
-        for (UserEntity user : this.userManager.findAll()) {
-            return user;
+    public void register(String login, String password, String nom, String prenom, String mail) {
+        UserEntity user = new UserEntity();
+        user.setLogin(login);
+        user.setMotDePasse(password);
+        user.setNom(nom);
+        user.setPrenom(prenom);
+        user.setMail(mail);
+
+        userManager.create(user);
+
+        this.currentUser = user;
+    }
+
+    public boolean login(String login, String password) {
+        UserEntity userEntity = this.userManager.findUserByLoginAndPasse(login, password);
+        if (userEntity != null) {
+            this.currentUser = userEntity;
+            return true;
         }
-        return new UserEntity();
+        return false;
+    }
+
+    public void disconnect() {
+        this.currentUser = null;
     }
 
     // Getters
@@ -98,6 +119,14 @@ public class Model {
         return this.valeurCritereManager.findAllValeurCritereByAnnonce(annonce.getId());
     }
 
+    public boolean isConnected() {
+        return this.currentUser != null;
+    }
+
+    public UserEntity getCurrentUser() {
+        return this.currentUser;
+    }
+
     // Modifiers
 
     public void addAnnonce(AnnonceEntity annonce) {
@@ -105,6 +134,7 @@ public class Model {
     }
 
     public void addValeurCritere(ValeurCritereEntity valeurCritere) {
+
         valeurCritereManager.create(valeurCritere);
     }
 }
