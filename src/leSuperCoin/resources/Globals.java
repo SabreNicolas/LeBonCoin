@@ -16,15 +16,14 @@ public class Globals {
         public static final String NOM_APPLI = "Le Super Coin";
         public static final String DEPOT_ANNONCE_BTN = "Déposer une annonce";
         public static final String MON_COMPTE_BTN = "Mon compte";
+        public static final String SE_CONNECTER_BTN = "Se connecter";
         public static final String LANCER_RECHERCHE = "Lancer la recherche";
-        public static final String CHAMPS_RECHERCHE = "Que cherchez-vous ?";
         public static final String TITRE_DEPOT_ANNONCE = "Déposer une annonce";
         public static final String ETAPE_SUIVANTE = "Étape suivante >";
         public static final String ETAPE_CATEGORIE = "Choisir une catégorie";
         public static final String ETAPE_SOUS_CATEGORIE = "Choisir une sous-catégorie";
         public static final String ETAPE_DESCRIPTION = "Description";
         public static final String ETAPE_CRITERES = "Détails";
-        public static final String ANNONCE_TITRE = "Titre de l'annonce";
         public static final String ANNONCE_DESCRIPTION = "Description de l'annonce";
     }
 

@@ -11,7 +11,10 @@ public class View extends JFrame {
     public enum Target {
         ACCUEIL,
         DEPOT_ANNONCE,
-        ANNONCE
+        ANNONCE,
+        CONNEXION,
+        INSCRIPTION,
+        MON_COMPTE
     }
 
     private Controller controller;
@@ -43,6 +46,15 @@ public class View extends JFrame {
                 break;
             case ANNONCE:
                 this.add(new Annonce(this.controller, (AnnonceEntity) payload));
+                break;
+            case CONNEXION:
+                this.add(new Connexion(this.controller));
+                break;
+            case INSCRIPTION:
+                this.add(new Inscription(this.controller));
+                break;
+            case MON_COMPTE:
+                this.add(new MonCompte(this.controller));
                 break;
             default:
                 throw new Error("Trying to navigate to inexsitant view");
